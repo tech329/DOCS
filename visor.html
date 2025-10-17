@@ -563,7 +563,7 @@
 <!-- LOADER -->
 <div class="loader" id="loader">
   <div class="spinner"></div>
-  <div class="loader-text">Cargando Manual de Crédito...</div>
+  <div class="loader-text" id="loaderText">Cargando documento...</div>
 </div>
 
 <!-- HEADER FIJO -->
@@ -676,6 +676,12 @@ function getDocumentInfo() {
 const DOCUMENT_INFO = getDocumentInfo();
 const MARKDOWN_URL = DOCUMENT_INFO.file;
 const DOCUMENT_TITLE = DOCUMENT_INFO.title;
+
+// Actualizar el texto del loader con el nombre del documento
+const loaderText = document.getElementById('loaderText');
+if (loaderText) {
+  loaderText.textContent = `Cargando ${DOCUMENT_TITLE}...`;
+}
 
 // ==========================================
 // SISTEMA DE SEGURIDAD ANTICOPIA

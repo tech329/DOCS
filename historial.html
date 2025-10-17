@@ -468,7 +468,7 @@
 
         function exportToCSV() {
             if (!allLogs || allLogs.length === 0) {
-                alert('No hay datos para exportar');
+                showNotification('No hay datos para exportar', 'warning');
                 return;
             }
 
@@ -487,6 +487,94 @@
             a.href = url;
             a.download = `historial_accesos_${new Date().toISOString().split('T')[0]}.csv`;
             a.click();
+            showNotification('Archivo CSV exportado exitosamente', 'success');
+        }
+
+        // Sistema de notificaciones personalizadas
+        function showNotification(message, type = 'info') {
+            // Crear contenedor si no existe
+            let container = document.getElementById('notification-container');
+            if (!container) {
+                container = document.createElement('div');
+                container.id = 'notification-container';
+                container.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    z-index: 10000;
+                `;
+                document.body.appendChild(container);
+            }
+            
+            const notification = document.createElement('div');
+            const colors = {
+                success: '#10b981',
+                error: '#ef4444',
+                warning: '#f59e0b',
+                info: '#3b82f6'
+            };
+            
+            const icons = {
+                success: 'fa-check-circle',
+                error: 'fa-exclamation-circle',
+                warning: 'fa-exclamation-triangle',
+                info: 'fa-info-circle'
+            };
+            
+            notification.style.cssText = `
+                background: ${colors[type] || colors.info};
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                margin-bottom: 10px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                min-width: 300px;
+                animation: slideInRight 0.3s ease;
+            `;
+            
+            notification.innerHTML = `
+                <i class="fas ${icons[type] || icons.info}"></i>
+                <span>${message}</span>
+            `;
+            
+            container.appendChild(notification);
+            
+            // Agregar estilos de animación si no existen
+            if (!document.getElementById('notification-styles')) {
+                const style = document.createElement('style');
+                style.id = 'notification-styles';
+                style.textContent = `
+                    @keyframes slideInRight {
+                        from {
+                            transform: translateX(400px);
+                            opacity: 0;
+                        }
+                        to {
+                            transform: translateX(0);
+                            opacity: 1;
+                        }
+                    }
+                    @keyframes slideOutRight {
+                        from {
+                            transform: translateX(0);
+                            opacity: 1;
+                        }
+                        to {
+                            transform: translateX(400px);
+                            opacity: 0;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
         }
 
         // Cargar al inicio

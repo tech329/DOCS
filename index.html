@@ -668,9 +668,136 @@
         }
 
         function handleLogout() {
-            if (confirm('¿Está seguro que desea cerrar sesión?')) {
-                window.TupakAuth.logout();
-            }
+            showConfirmDialog(
+                '¿Está seguro que desea cerrar sesión?',
+                'Esta acción finalizará su sesión actual',
+                () => {
+                    window.TupakAuth.logout();
+                }
+            );
+        }
+
+        // Sistema de diálogos personalizados
+        function showConfirmDialog(title, message, onConfirm) {
+            // Crear overlay
+            const overlay = document.createElement('div');
+            overlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 10000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                animation: fadeIn 0.2s ease;
+            `;
+
+            // Crear diálogo
+            const dialog = document.createElement('div');
+            dialog.style.cssText = `
+                background: white;
+                border-radius: 12px;
+                padding: 30px;
+                max-width: 400px;
+                width: 90%;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+                animation: slideIn 0.3s ease;
+            `;
+
+            dialog.innerHTML = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <i class="fas fa-question-circle" style="font-size: 3em; color: var(--secondary);"></i>
+                </div>
+                <h3 style="color: var(--primary); text-align: center; margin-bottom: 10px; font-size: 1.3em;">${title}</h3>
+                <p style="color: var(--text-gray); text-align: center; margin-bottom: 25px;">${message}</p>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <button id="btn-cancel" style="
+                        flex: 1;
+                        padding: 12px 24px;
+                        border: 2px solid var(--text-gray);
+                        background: white;
+                        color: var(--text-gray);
+                        border-radius: 6px;
+                        font-weight: 600;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                    ">
+                        Cancelar
+                    </button>
+                    <button id="btn-confirm" style="
+                        flex: 1;
+                        padding: 12px 24px;
+                        border: none;
+                        background: var(--secondary);
+                        color: white;
+                        border-radius: 6px;
+                        font-weight: 600;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                    ">
+                        Sí, cerrar sesión
+                    </button>
+                </div>
+            `;
+
+            overlay.appendChild(dialog);
+            document.body.appendChild(overlay);
+
+            // Estilos de animación
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+                @keyframes slideIn {
+                    from { transform: translateY(-20px); opacity: 0; }
+                    to { transform: translateY(0); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Eventos de botones
+            const btnCancel = dialog.querySelector('#btn-cancel');
+            const btnConfirm = dialog.querySelector('#btn-confirm');
+
+            btnCancel.addEventListener('mouseover', () => {
+                btnCancel.style.background = '#f0f0f0';
+            });
+            btnCancel.addEventListener('mouseout', () => {
+                btnCancel.style.background = 'white';
+            });
+
+            btnConfirm.addEventListener('mouseover', () => {
+                btnConfirm.style.background = '#c87010';
+            });
+            btnConfirm.addEventListener('mouseout', () => {
+                btnConfirm.style.background = 'var(--secondary)';
+            });
+
+            btnCancel.addEventListener('click', () => {
+                overlay.remove();
+                style.remove();
+            });
+
+            btnConfirm.addEventListener('click', () => {
+                overlay.remove();
+                style.remove();
+                if (onConfirm) onConfirm();
+            });
+
+            // Cerrar con ESC
+            const handleEsc = (e) => {
+                if (e.key === 'Escape') {
+                    overlay.remove();
+                    style.remove();
+                    document.removeEventListener('keydown', handleEsc);
+                }
+            };
+            document.addEventListener('keydown', handleEsc);
         }
 
         // Inicializar al cargar la página
