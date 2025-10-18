@@ -105,6 +105,31 @@
             font-size: 1em;
         }
 
+        .section-header {
+            margin-top: 50px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--secondary);
+        }
+
+        .section-header h3 {
+            color: var(--primary);
+            font-size: 1.5em;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .section-header h3 i {
+            color: var(--secondary);
+            margin-right: 10px;
+        }
+
+        .section-header p {
+            color: var(--text-gray);
+            font-size: 0.95em;
+            margin: 0;
+        }
+
         .library-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -403,12 +428,64 @@
     <div class="main-content">
         <div class="container">
             <div class="page-title">
-                <h2>Documentos Disponibles</h2>
-                <p>Accede a los manuales y recursos institucionales</p>
+                <h2>Biblioteca Digital</h2>
+                <p>Accede a los documentos normativos y manuales institucionales</p>
+            </div>
+
+            <!-- SECCIÓN 1: ESTATUTOS Y REGLAMENTOS -->
+            <div class="section-header">
+                <h3><i class="fas fa-gavel"></i> Estatutos y Reglamentos</h3>
+                <p>Marco normativo y legal de la institución</p>
             </div>
 
             <div class="library-grid">
-                <!-- Libro 1: Manual de Crédito -->
+                <!-- Documento 1: Estatuto Social -->
+                <div class="book-card" onclick="openBook('visor.html?id=003')">
+                    <div class="book-cover">
+                        <div class="book-icon"><i class="fas fa-balance-scale"></i></div>
+                        <div class="book-title-cover">ESTATUTO SOCIAL</div>
+                        <div class="book-subtitle-cover">TUPAK RANTINA</div>
+                    </div>
+                    <div class="book-info">
+                        <h3>Estatuto Social</h3>
+                        <p>Estatuto Social Reformado de la Caja de Ahorro y Crédito TUPAK RANTINA.</p>
+                        <div class="book-meta">
+                            <span class="book-category"><i class="fas fa-gavel"></i> Normativa</span>
+                            <button class="read-btn">
+                                <i class="fas fa-arrow-right"></i> Leer Ahora
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Documento 2: Reglamento Interno -->
+                <div class="book-card" onclick="openBook('visor.html?id=004')">
+                    <div class="book-cover">
+                        <div class="book-icon"><i class="fas fa-clipboard-list"></i></div>
+                        <div class="book-title-cover">REGLAMENTO INTERNO</div>
+                        <div class="book-subtitle-cover">TUPAK RANTINA</div>
+                    </div>
+                    <div class="book-info">
+                        <h3>Reglamento Interno</h3>
+                        <p>Reglamento Interno que regula la organización, funcionamiento y procedimientos operativos de la Caja.</p>
+                        <div class="book-meta">
+                            <span class="book-category"><i class="fas fa-gavel"></i> Normativa</span>
+                            <button class="read-btn">
+                                <i class="fas fa-arrow-right"></i> Leer Ahora
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN 2: MANUALES OPERATIVOS -->
+            <div class="section-header">
+                <h3><i class="fas fa-book-open"></i> Manuales Operativos</h3>
+                <p>Guías de procedimientos y operaciones institucionales</p>
+            </div>
+
+            <div class="library-grid">
+                <!-- Manual 1: Manual de Crédito -->
                 <div class="book-card" onclick="openBook('visor.html?id=001')">
                     <div class="book-cover">
                         <div class="book-icon"><i class="fas fa-book"></i></div>
@@ -427,7 +504,7 @@
                     </div>
                 </div>
 
-                <!-- Libro 2: Manual de Ahorro Programado -->
+                <!-- Manual 2: Manual de Ahorro Programado -->
                 <div class="book-card" onclick="openBook('visor.html?id=002')">
                     <div class="book-cover">
                         <div class="book-icon"><i class="fas fa-piggy-bank"></i></div>
@@ -438,7 +515,7 @@
                         <h3>Manual de Ahorro Programado</h3>
                         <p>Políticas, procedimientos y modalidades del ahorro programado para socios de la Caja.</p>
                         <div class="book-meta">
-                            <span class="book-category"><i class="fas fa-wallet"></i> Captaciones</span>
+                            <span class="book-category"><i class="fas fa-wallet"></i> Ahorros</span>
                             <button class="read-btn">
                                 <i class="fas fa-arrow-right"></i> Leer Ahora
                             </button>
@@ -446,7 +523,26 @@
                     </div>
                 </div>
 
-                <!-- Para agregar más documentos, sigue este patrón con códigos secuenciales (003, 004, etc.) -->
+                <!-- Manual 3: Manual de Caja y Bóveda -->
+                <div class="book-card" onclick="openBook('visor.html?id=005')">
+                    <div class="book-cover">
+                        <div class="book-icon"><i class="fas fa-cash-register"></i></div>
+                        <div class="book-title-cover">MANUAL DE CAJA Y BÓVEDA</div>
+                        <div class="book-subtitle-cover">TUPAK RANTINA</div>
+                    </div>
+                    <div class="book-info">
+                        <h3>Manual de Caja y Bóveda (BETA)</h3>
+                        <p>Procedimientos de manejo y control de caja y bóveda, con énfasis en gestión del riesgo de liquidez.</p>
+                        <div class="book-meta">
+                            <span class="book-category"><i class="fas fa-shield-alt"></i> Operaciones</span>
+                            <button class="read-btn">
+                                <i class="fas fa-arrow-right"></i> Leer Ahora
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Para agregar más manuales, sigue este patrón con códigos secuenciales (006, 007, etc.) -->
             </div>
         </div>
     </div>
