@@ -11,6 +11,12 @@ const SESSION_KEY = 'tupak_session';
 const LAST_ACTIVITY_KEY = 'tupak_last_activity';
 const SUPABASE_SESSION_KEY = 'tupak_supabase_session';
 
+// Configuración OTP
+const OTP_SESSION_KEY = 'tupak_otp_session';
+const OTP_TIMEOUT = 5 * 60 * 1000; // 5 minutos para ingresar OTP
+const WHATSAPP_API_URL = 'https://api.luispinta.com/message/sendText/CajaGerencia';
+const WHATSAPP_API_KEY = 'smaksnaHG';
+
 // Crear instancia de Supabase
 let supabase;
 if (typeof window.supabase !== 'undefined') {
@@ -234,6 +240,85 @@ async function logUserLogin(userId, email, documentoAbierto = 'Sin especificar')
     }
 }
 
+// ===== FUNCIONES OTP =====
+function generateOTP() {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let otp = '';
+    for (let i = 0; i < 6; i++) {
+        otp += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return otp;
+}
+
+function storeOTPSession(email, otp, userData, supabaseData) {
+    const otpSession = {
+        email: email,
+        otp: otp,
+        userData: userData,
+        supabaseData: supabaseData,
+        timestamp: Date.now()
+    };
+    sessionStorage.setItem(OTP_SESSION_KEY, JSON.stringify(otpSession));
+}
+
+function getOTPSession() {
+    const otpData = sessionStorage.getItem(OTP_SESSION_KEY);
+    if (!otpData) return null;
+    
+    try {
+        const session = JSON.parse(otpData);
+        const elapsed = Date.now() - session.timestamp;
+        
+        if (elapsed > OTP_TIMEOUT) {
+            clearOTPSession();
+            return null;
+        }
+        
+        return session;
+    } catch (error) {
+        console.error('Error al parsear sesión OTP:', error);
+        clearOTPSession();
+        return null;
+    }
+}
+
+function clearOTPSession() {
+    sessionStorage.removeItem(OTP_SESSION_KEY);
+}
+
+async function sendOTPWhatsApp(phoneNumber, otp, userName) {
+    try {
+        const message = `🔐 *TUPAK RANTINA - Código de Verificación*\n\nHola ${userName},\n\nTu código de acceso es: *${otp}*\n\nEste código expira en 5 minutos.\n\n_Si no solicitaste este código, ignora este mensaje._`;
+        
+        const options = {
+            method: 'POST',
+            headers: {
+                'apikey': WHATSAPP_API_KEY,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                number: phoneNumber,
+                text: message,
+                delay: 0,
+                linkPreview: false
+            })
+        };
+
+        const response = await fetch(WHATSAPP_API_URL, options);
+        const data = await response.json();
+        
+        if (response.ok) {
+            return { success: true, data: data };
+        } else {
+            console.error('Error al enviar OTP:', data);
+            return { success: false, error: 'Error al enviar código' };
+        }
+    } catch (error) {
+        console.error('Error en sendOTPWhatsApp:', error);
+        return { success: false, error: error.message };
+    }
+}
+
 // ===== REGISTRAR ACCIÓN DEL USUARIO =====
 async function logUserAction(accion) {
     const userId = getUserId();
@@ -320,24 +405,98 @@ async function login(email, password) {
             };
         }
 
-        // 3. Guardar sesión de Supabase para futuras solicitudes
+        // 3. Verificar que el usuario tenga WhatsApp configurado
+        if (!userData.whatsapp) {
+            await supabase.auth.signOut();
+            return {
+                success: false,
+                error: 'No tienes un número de WhatsApp configurado. Contacta al administrador.'
+            };
+        }
+
+        // 4. Generar OTP
+        const otp = generateOTP();
+        
+        // 5. Enviar OTP por WhatsApp
+        const sendResult = await sendOTPWhatsApp(userData.whatsapp, otp, userData.nombre);
+        
+        if (!sendResult.success) {
+            await supabase.auth.signOut();
+            return {
+                success: false,
+                error: 'No se pudo enviar el código de verificación. Intenta nuevamente.'
+            };
+        }
+
+        // 6. Guardar toda la información de sesión (NO cerrar sesión de Supabase)
+        storeOTPSession(email, otp, userData, data);
+        
+        // 7. Guardar sesión de Supabase para mantenerla activa
         if (data.session) {
             storeSupabaseSession(data.session);
+        }
+        
+        return { 
+            success: true, 
+            requiresOTP: true,
+            message: `Código enviado a WhatsApp terminado en (${userData.whatsapp.slice(-4)})`
+        };
+    } catch (error) {
+        console.error('Error en login:', error);
+        return { success: false, error: error.message };
+    }
+}
+
+// ===== VERIFICAR OTP Y COMPLETAR LOGIN =====
+async function verifyOTPAndLogin(inputOTP) {
+    try {
+        // 1. Obtener sesión OTP
+        const otpSession = getOTPSession();
+        
+        if (!otpSession) {
+            return {
+                success: false,
+                error: 'El código ha expirado. Por favor, inicia sesión nuevamente.'
+            };
+        }
+
+        // 2. Verificar OTP
+        if (inputOTP.toUpperCase() !== otpSession.otp) {
+            return {
+                success: false,
+                error: 'Código incorrecto. Verifica e intenta nuevamente.'
+            };
+        }
+
+        // 3. La sesión de Supabase ya está activa, solo verificamos que siga válida
+        const { data: { session }, error } = await supabase.auth.getSession();
+        
+        if (error || !session) {
+            console.error('Error al verificar sesión:', error);
+            clearOTPSession();
+            return {
+                success: false,
+                error: 'Sesión expirada. Por favor, inicia sesión nuevamente.'
+            };
         }
 
         // 4. Guardar sesión con datos adicionales
         const enhancedUser = {
-            ...data.user,
-            userData: userData // Incluir datos de docsuserstr
+            ...session.user,
+            userData: otpSession.userData
         };
         setSession(enhancedUser);
         
-        // 5. Iniciar monitoreo
+        // 5. Limpiar sesión OTP
+        clearOTPSession();
+        
+        // 6. Iniciar monitoreo
         startSessionMonitoring();
         
         return { success: true, user: enhancedUser };
     } catch (error) {
-        console.error('Error en login:', error);
+        console.error('Error en verifyOTPAndLogin:', error);
+        clearOTPSession();
         return { success: false, error: error.message };
     }
 }
@@ -573,5 +732,9 @@ window.TupakAuth = {
     logUserLogin,
     logUserAction,
     showNotification,
-    updateLastActivity
+    updateLastActivity,
+    // Funciones OTP
+    verifyOTPAndLogin,
+    getOTPSession,
+    clearOTPSession
 };

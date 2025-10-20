@@ -244,9 +244,202 @@
             font-size: 0.9em;
         }
 
+        /* ===== ESTILOS OTP ===== */
+        .otp-container {
+            display: none;
+        }
+
+        .otp-container.active {
+            display: block;
+        }
+
+        .otp-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .otp-header .otp-icon {
+            font-size: 3.5em;
+            color: var(--secondary);
+            margin-bottom: 15px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .otp-header h2 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .otp-header p {
+            color: #6c757d;
+            font-size: 0.95em;
+        }
+
+        .otp-input-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 30px 0;
+        }
+
+        .otp-input {
+            width: 50px;
+            height: 60px;
+            font-size: 1.8em;
+            font-weight: bold;
+            text-align: center;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .otp-input:focus {
+            outline: none;
+            border-color: var(--secondary);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(228, 132, 16, 0.1);
+        }
+
+        .otp-input.filled {
+            border-color: var(--accent);
+            background: white;
+        }
+
+        .otp-input.error {
+            border-color: #c33;
+            background: #fee;
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .otp-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .btn-verify-otp {
+            background: var(--secondary);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-verify-otp:hover {
+            background: #c57310;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(228, 132, 16, 0.3);
+        }
+
+        .btn-verify-otp:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-resend-otp {
+            background: transparent;
+            color: var(--accent);
+            padding: 12px;
+            border: 2px solid var(--accent);
+            border-radius: 8px;
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-resend-otp:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-resend-otp:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .otp-timer {
+            text-align: center;
+            margin-top: 15px;
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+
+        .otp-timer.warning {
+            color: #e48410;
+            font-weight: 600;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            display: none;
+            border-left: 4px solid #28a745;
+            text-align: center;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .welcome-name {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--primary);
+            margin-top: 10px;
+        }
+
         @media (max-width: 768px) {
             .login-container {
                 grid-template-columns: 1fr;
+            }
+
+            .otp-input {
+                width: 45px;
+                height: 55px;
+                font-size: 1.5em;
+            }
+
+            .otp-input-group {
+                gap: 8px;
             }
 
             .login-left {
@@ -267,6 +460,399 @@
 
             .login-form-header h2 {
                 font-size: 1.6em;
+            }
+        }
+
+        /* ===== ESTILOS MODALES TÉRMINOS Y CONDICIONES ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9998;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            animation: slideUp 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary), var(--blue));
+            color: white;
+            padding: 25px 30px;
+            border-radius: 16px 16px 0 0;
+            position: relative;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .modal-header .modal-icon {
+            font-size: 1.8em;
+        }
+
+        .modal-body {
+            padding: 30px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .modal-body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .modal-body::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 10px;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        .welcome-text {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .welcome-text h3 {
+            color: var(--primary);
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+
+        .welcome-text p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1em;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .warning-box p {
+            margin: 0;
+            color: #856404;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .checkbox-container:hover {
+            background: #e9ecef;
+        }
+
+        .checkbox-container.checked {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .custom-checkbox {
+            position: relative;
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .custom-checkbox input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .checkbox-mark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 24px;
+            height: 24px;
+            border: 2px solid #6c757d;
+            border-radius: 6px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .custom-checkbox input[type="checkbox"]:checked ~ .checkbox-mark {
+            background: #28a745;
+            border-color: #28a745;
+        }
+
+        .checkbox-mark::after {
+            content: '';
+            position: absolute;
+            display: none;
+            left: 7px;
+            top: 3px;
+            width: 6px;
+            height: 12px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .custom-checkbox input[type="checkbox"]:checked ~ .checkbox-mark::after {
+            display: block;
+        }
+
+        .checkbox-label {
+            color: #333;
+            font-size: 0.95em;
+            line-height: 1.5;
+            flex: 1;
+        }
+
+        .btn-read-terms {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-read-terms:hover {
+            background: var(--blue);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(1, 92, 208, 0.3);
+        }
+
+        .btn-send-code {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-send-code:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-send-code:not(:disabled):hover {
+            background: #c56f0a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(228, 132, 16, 0.3);
+        }
+
+        /* Modal de Términos Completos */
+        .terms-modal .modal-content {
+            max-width: 800px;
+            max-height: 85vh;
+        }
+
+        .terms-modal .modal-body {
+            font-size: 0.95em;
+            line-height: 1.7;
+            color: #333;
+        }
+
+        .terms-modal h3 {
+            color: var(--primary);
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .terms-modal h3:first-child {
+            margin-top: 0;
+        }
+
+        .terms-modal ul {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        .terms-modal li {
+            margin-bottom: 10px;
+        }
+
+        .terms-modal .highlight-box {
+            background: #fff5f5;
+            border-left: 4px solid #fc8181;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+        }
+
+        .terms-modal .highlight-box p {
+            margin: 0;
+            color: #c53030;
+            font-weight: bold;
+        }
+
+        .scroll-indicator {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-top: 2px solid #e9ecef;
+            color: #6c757d;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .scroll-indicator.completed {
+            background: #d4edda;
+            color: #28a745;
+            border-top-color: #28a745;
+        }
+
+        .scroll-indicator i {
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .btn-close-terms {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 8px;
+            font-size: 1.05em;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+        }
+
+        .btn-close-terms:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .btn-close-terms:not(:disabled):hover {
+            background: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                max-height: 95vh;
+            }
+
+            .modal-header {
+                padding: 20px;
+            }
+
+            .modal-header h2 {
+                font-size: 1.2em;
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
+
+            .welcome-text h3 {
+                font-size: 1.2em;
+            }
+
+            .terms-modal h3 {
+                font-size: 1.1em;
+            }
+
+            .checkbox-container {
+                padding: 15px;
+            }
+
+            .btn-send-code {
+                padding: 12px 20px;
+                font-size: 1em;
             }
         }
     </style>
@@ -323,6 +909,7 @@
 
             <div id="error-message" class="error-message"></div>
 
+            <!-- Formulario de Login -->
             <form id="login-form">
                 <div class="form-group">
                     <label for="email">Correo Electrónico</label>
@@ -359,6 +946,46 @@
                 </button>
             </form>
 
+            <!-- Formulario OTP (oculto inicialmente) -->
+            <div id="otp-container" class="otp-container">
+                <div class="otp-header">
+                    <div class="otp-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h2>Verificación de Seguridad</h2>
+                    <p id="otp-message">Ingresa el código de 6 dígitos que enviamos a tu WhatsApp</p>
+                </div>
+
+                <div id="success-message" class="success-message">
+                    <i class="fas fa-check-circle" style="font-size: 2em; margin-bottom: 10px;"></i>
+                    <div>¡Verificación exitosa!</div>
+                    <div class="welcome-name" id="welcome-user"></div>
+                    <p style="margin-top: 10px;">Redirigiendo...</p>
+                </div>
+
+                <div class="otp-input-group">
+                    <input type="text" class="otp-input" maxlength="1" data-index="0" autocomplete="off">
+                    <input type="text" class="otp-input" maxlength="1" data-index="1" autocomplete="off">
+                    <input type="text" class="otp-input" maxlength="1" data-index="2" autocomplete="off">
+                    <input type="text" class="otp-input" maxlength="1" data-index="3" autocomplete="off">
+                    <input type="text" class="otp-input" maxlength="1" data-index="4" autocomplete="off">
+                    <input type="text" class="otp-input" maxlength="1" data-index="5" autocomplete="off">
+                </div>
+
+                <div class="otp-timer" id="otp-timer"></div>
+
+                <div class="otp-actions">
+                    <button type="button" id="btn-verify-otp" class="btn-verify-otp">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Verificar Código</span>
+                    </button>
+                    <button type="button" id="btn-resend-otp" class="btn-resend-otp" disabled>
+                        <i class="fas fa-redo"></i>
+                        Enviar nuevo código
+                    </button>
+                </div>
+            </div>
+
             <div class="footer-text">
                 <p>&copy; 2025 TUPAK RANTINA</p>
                 <p>Todos los derechos reservados</p>
@@ -373,39 +1000,63 @@
     
     <script>
         // ==========================================
-        // PROTECCIONES DE SEGURIDAD
+        // PROTECCIONES DE SEGURIDAD DESACTIVADAS EN LOGIN
         // ==========================================
-        document.addEventListener('contextmenu', e => { e.preventDefault(); return false; });
-        document.addEventListener('selectstart', e => { e.preventDefault(); return false; });
-        document.addEventListener('copy', e => { e.preventDefault(); return false; });
-        document.addEventListener('keydown', function(e) {
-            // if (e.key === 'F12' || e.keyCode === 123 || e.ctrlKey || e.metaKey) {
-            if (e.ctrlKey || e.metaKey) {
-                e.preventDefault();
-                return false;
-            }
-        });
+        // Las protecciones están desactivadas en la página de login para permitir debugging
+        // Se activan automáticamente en las páginas internas del sistema
+        
+        // document.addEventListener('contextmenu', e => { e.preventDefault(); return false; });
+        // document.addEventListener('selectstart', e => { e.preventDefault(); return false; });
+        // document.addEventListener('copy', e => { e.preventDefault(); return false; });
+        // document.addEventListener('keydown', function(e) {
+        //     if (e.ctrlKey || e.metaKey) {
+        //         e.preventDefault();
+        //         return false;
+        //     }
+        // });
 
         // ==========================================
-        // FORMULARIO DE LOGIN
+        // OBTENER INSTANCIA DE SUPABASE
+        // ==========================================
+        // Función auxiliar para obtener supabase desde el contexto global de auth.js
+        function getSupabase() {
+            // Esperar a que auth.js cargue y exponga supabase
+            if (typeof supabase !== 'undefined') {
+                return supabase;
+            }
+            throw new Error('Supabase no está disponible. Verifica que auth.js esté cargado.');
+        }
+
+        // ==========================================
+        // ELEMENTOS DEL DOM
         // ==========================================
         const loginForm = document.getElementById('login-form');
         const emailInput = document.getElementById('email');
         const passwordInput = document.getElementById('password');
         const btnLogin = document.getElementById('btn-login');
         const errorMessage = document.getElementById('error-message');
+        const otpContainer = document.getElementById('otp-container');
+        const otpInputs = document.querySelectorAll('.otp-input');
+        const btnVerifyOTP = document.getElementById('btn-verify-otp');
+        const btnResendOTP = document.getElementById('btn-resend-otp');
+        const otpTimer = document.getElementById('otp-timer');
+        const successMessage = document.getElementById('success-message');
+        const welcomeUser = document.getElementById('welcome-user');
+        const otpMessage = document.getElementById('otp-message');
 
-        // Verificar si ya hay sesión activa
+        let otpTimerInterval = null;
+        let resendCooldown = null;
+
+        // ==========================================
+        // VERIFICAR SESIÓN ACTIVA
+        // ==========================================
         window.addEventListener('DOMContentLoaded', async () => {
-            // Esperar a que TupakAuth esté disponible
             if (!window.TupakAuth) {
                 setTimeout(async () => {
                     const session = sessionStorage.getItem('tupak_session');
                     if (session) {
                         const isValid = await window.TupakAuth.checkAuth();
-                        if (isValid) {
-                            window.location.href = 'index.html';
-                        }
+                        if (isValid) window.location.href = 'index.html';
                     }
                 }, 100);
                 return;
@@ -414,11 +1065,14 @@
             const session = sessionStorage.getItem('tupak_session');
             if (session) {
                 const isValid = await window.TupakAuth.checkAuth();
-                if (isValid) {
-                    window.location.href = 'index.html';
-                }
+                if (isValid) window.location.href = 'index.html';
             }
         });
+
+        // ==========================================
+        // FORMULARIO DE LOGIN
+        // ==========================================
+        let pendingLoginData = null;
 
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -426,58 +1080,618 @@
             const email = emailInput.value.trim();
             const password = passwordInput.value;
 
-            // Validar campos
             if (!email || !password) {
                 showError('Por favor, complete todos los campos');
                 return;
             }
 
-            // Mostrar estado de carga
             btnLogin.classList.add('loading');
             btnLogin.disabled = true;
             hideError();
 
             try {
-                // Intentar login
-                const result = await window.TupakAuth.login(email, password);
+                const supabaseClient = getSupabase();
+                
+                // Primero validamos credenciales pero NO enviamos OTP aún
+                const { data, error } = await supabaseClient.auth.signInWithPassword({
+                    email: email,
+                    password: password
+                });
 
-                if (result.success) {
-                    window.TupakAuth.showNotification('Inicio de sesión exitoso', 'success');
-                    
-                    // Registrar login exitoso
-                    const userId = result.user.id;
-                    const userEmail = result.user.email;
-                    await window.TupakAuth.logUserLogin(userId, userEmail, 'Login exitoso');
-                    
-                    // Pequeño delay para mostrar el mensaje
-                    setTimeout(() => {
-                        window.location.href = 'index.html';
-                    }, 500);
-                } else {
-                    showError(result.error || 'Credenciales incorrectas');
-                    btnLogin.classList.remove('loading');
-                    btnLogin.disabled = false;
+                if (error) {
+                    throw error;
                 }
+
+                if (!data.user) {
+                    throw new Error('No se pudo iniciar sesión');
+                }
+
+                // Verificar permisos y obtener datos del usuario
+                const { data: userData, error: userError } = await supabaseClient
+                    .from('docsuserstr')
+                    .select('*')
+                    .eq('correo', email)
+                    .single();
+
+                if (userError || !userData) {
+                    await supabaseClient.auth.signOut();
+                    throw new Error('No cuentas con los permisos suficientes para acceder a este sistema.');
+                }
+
+                if (!userData.whatsapp) {
+                    await supabaseClient.auth.signOut();
+                    throw new Error('No tienes un número de WhatsApp configurado. Contacta al administrador.');
+                }
+
+                // Guardar datos temporalmente
+                pendingLoginData = {
+                    email: email,
+                    password: password,
+                    userData: userData,
+                    supabaseData: data
+                };
+
+                // Mostrar modal de bienvenida con términos
+                btnLogin.classList.remove('loading');
+                btnLogin.disabled = false;
+                showWelcomeModal(userData.whatsapp);
+                
             } catch (error) {
                 console.error('Error en login:', error);
-                showError('Error al iniciar sesión. Intente nuevamente.');
+                showError(error.message || 'Credenciales incorrectas');
                 btnLogin.classList.remove('loading');
                 btnLogin.disabled = false;
             }
         });
 
+        // ==========================================
+        // GESTIÓN DE INPUTS OTP
+        // ==========================================
+        otpInputs.forEach((input, index) => {
+            // Solo permitir letras mayúsculas y números
+            input.addEventListener('input', (e) => {
+                let value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+                e.target.value = value;
+
+                if (value) {
+                    input.classList.add('filled');
+                    input.classList.remove('error');
+                    
+                    // Avanzar al siguiente input
+                    if (index < otpInputs.length - 1) {
+                        otpInputs[index + 1].focus();
+                    }
+                } else {
+                    input.classList.remove('filled');
+                }
+            });
+
+            // Manejar backspace
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                    otpInputs[index - 1].focus();
+                }
+            });
+
+            // Manejar paste
+            input.addEventListener('paste', (e) => {
+                e.preventDefault();
+                const pastedData = e.clipboardData.getData('text').toUpperCase().replace(/[^A-Z0-9]/g, '');
+                
+                for (let i = 0; i < pastedData.length && index + i < otpInputs.length; i++) {
+                    otpInputs[index + i].value = pastedData[i];
+                    otpInputs[index + i].classList.add('filled');
+                }
+                
+                const lastFilledIndex = Math.min(index + pastedData.length, otpInputs.length - 1);
+                otpInputs[lastFilledIndex].focus();
+            });
+        });
+
+        // ==========================================
+        // VERIFICAR OTP
+        // ==========================================
+        btnVerifyOTP.addEventListener('click', async () => {
+            const otp = Array.from(otpInputs).map(input => input.value).join('');
+            
+            if (otp.length !== 6) {
+                showError('Por favor, ingresa los 6 dígitos del código');
+                return;
+            }
+
+            btnVerifyOTP.disabled = true;
+            hideError();
+
+            try {
+                const result = await window.TupakAuth.verifyOTPAndLogin(otp);
+
+                if (result.success) {
+                    // Mostrar mensaje de éxito
+                    successMessage.classList.add('show');
+                    welcomeUser.textContent = `¡Bienvenido ${result.user.userData.nombre}!`;
+                    
+                    // Registrar login exitoso
+                    await window.TupakAuth.logUserLogin(result.user.id, result.user.email, 'Login exitoso con OTP');
+                    
+                    // Redirigir después de 2 segundos
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 2000);
+                } else {
+                    showError(result.error || 'Código incorrecto');
+                    otpInputs.forEach(input => {
+                        input.classList.add('error');
+                        input.value = '';
+                    });
+                    otpInputs[0].focus();
+                    btnVerifyOTP.disabled = false;
+                }
+            } catch (error) {
+                console.error('Error verificando OTP:', error);
+                showError('Error al verificar código. Intenta nuevamente.');
+                btnVerifyOTP.disabled = false;
+            }
+        });
+
+        // ==========================================
+        // REENVIAR OTP
+        // ==========================================
+        btnResendOTP.addEventListener('click', async () => {
+            btnResendOTP.disabled = true;
+            hideError();
+
+            try {
+                // Obtener email y password del formulario
+                const email = emailInput.value.trim();
+                const password = passwordInput.value;
+
+                const result = await window.TupakAuth.login(email, password);
+
+                if (result.success && result.requiresOTP) {
+                    showError('✅ Nuevo código enviado a tu WhatsApp');
+                    errorMessage.style.background = '#d4edda';
+                    errorMessage.style.color = '#155724';
+                    errorMessage.style.borderColor = '#28a745';
+                    
+                    // Limpiar inputs
+                    otpInputs.forEach(input => {
+                        input.value = '';
+                        input.classList.remove('filled', 'error');
+                    });
+                    otpInputs[0].focus();
+                    
+                    // Reiniciar timer
+                    startOTPTimer();
+                    startResendCooldown();
+                } else {
+                    showError('Error al reenviar código. Intenta nuevamente.');
+                }
+            } catch (error) {
+                console.error('Error reenviando OTP:', error);
+                showError('Error al reenviar código.');
+            }
+        });
+
+        // ==========================================
+        // TIMER OTP
+        // ==========================================
+        function startOTPTimer() {
+            let timeLeft = 300; // 5 minutos
+
+            if (otpTimerInterval) clearInterval(otpTimerInterval);
+
+            otpTimerInterval = setInterval(() => {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                
+                otpTimer.textContent = `Código válido por: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 60) {
+                    otpTimer.classList.add('warning');
+                }
+                
+                if (timeLeft <= 0) {
+                    clearInterval(otpTimerInterval);
+                    showError('El código ha expirado. Por favor, solicita uno nuevo.');
+                    btnVerifyOTP.disabled = true;
+                }
+            }, 1000);
+
+            // Cooldown para reenviar (30 segundos)
+            startResendCooldown();
+        }
+
+        function startResendCooldown() {
+            let cooldown = 30;
+            btnResendOTP.disabled = true;
+            btnResendOTP.innerHTML = `<i class="fas fa-redo"></i> Espera ${cooldown}s`;
+
+            if (resendCooldown) clearInterval(resendCooldown);
+
+            resendCooldown = setInterval(() => {
+                cooldown--;
+                btnResendOTP.innerHTML = `<i class="fas fa-redo"></i> Espera ${cooldown}s`;
+                
+                if (cooldown <= 0) {
+                    clearInterval(resendCooldown);
+                    btnResendOTP.disabled = false;
+                    btnResendOTP.innerHTML = '<i class="fas fa-redo"></i> Enviar nuevo código';
+                }
+            }, 1000);
+        }
+
+        // ==========================================
+        // FUNCIONES AUXILIARES
+        // ==========================================
         function showError(message) {
             errorMessage.textContent = message;
             errorMessage.classList.add('show');
+            errorMessage.style.background = '#fee';
+            errorMessage.style.color = '#c33';
+            errorMessage.style.borderColor = '#c33';
         }
 
         function hideError() {
             errorMessage.classList.remove('show');
         }
 
-        // Limpiar error al escribir
         emailInput.addEventListener('input', hideError);
         passwordInput.addEventListener('input', hideError);
+
+        // ==========================================
+        // TÉRMINOS Y CONDICIONES
+        // ==========================================
+        let modalWelcome, modalTerms, checkboxAccept, checkboxContainer;
+        let btnReadTerms, btnSendCode, btnCloseTerms, termsContent, scrollIndicator;
+        let hasReadTerms = false;
+        let userWhatsAppLast4 = '****';
+
+        // Inicializar elementos de términos cuando el DOM esté completamente cargado
+        function initTermsAndConditions() {
+            modalWelcome = document.getElementById('modal-welcome');
+            modalTerms = document.getElementById('modal-terms');
+            checkboxAccept = document.getElementById('checkbox-accept');
+            checkboxContainer = document.querySelector('.checkbox-container');
+            btnReadTerms = document.getElementById('btn-read-terms');
+            btnSendCode = document.getElementById('btn-send-code');
+            btnCloseTerms = document.getElementById('btn-close-terms');
+            termsContent = document.getElementById('terms-content');
+            scrollIndicator = document.getElementById('scroll-indicator');
+
+            // Verificar que todos los elementos existan
+            if (!modalWelcome || !modalTerms || !checkboxAccept || !checkboxContainer ||
+                !btnReadTerms || !btnSendCode || !btnCloseTerms || !termsContent || !scrollIndicator) {
+                console.error('No se pudieron encontrar todos los elementos de términos y condiciones');
+                return false;
+            }
+
+            // Toggle checkbox
+            checkboxContainer.addEventListener('click', function() {
+                checkboxAccept.checked = !checkboxAccept.checked;
+                updateCheckboxState();
+            });
+
+            checkboxAccept.addEventListener('change', updateCheckboxState);
+
+            // Abrir modal de términos completos
+            btnReadTerms.addEventListener('click', function() {
+                modalTerms.classList.add('active');
+                termsContent.scrollTop = 0;
+                btnCloseTerms.disabled = true;
+                updateScrollIndicator();
+            });
+
+            // Cerrar modal de términos
+            btnCloseTerms.addEventListener('click', function() {
+                modalTerms.classList.remove('active');
+                hasReadTerms = true;
+            });
+
+            // Detectar scroll hasta el final
+            termsContent.addEventListener('scroll', updateScrollIndicator);
+
+            // Enviar código OTP (continuar con el flujo normal)
+            btnSendCode.addEventListener('click', async function() {
+                if (!checkboxAccept.checked || !pendingLoginData) return;
+
+                btnSendCode.disabled = true;
+                btnSendCode.innerHTML = '<span class="spinner"></span> Enviando código...';
+
+                try {
+                    // Ahora sí llamamos al login completo con auth.js
+                    const result = await window.TupakAuth.login(
+                        pendingLoginData.email, 
+                        pendingLoginData.password
+                    );
+
+                    if (result.success && result.requiresOTP) {
+                        // Cerrar modal de bienvenida
+                        modalWelcome.classList.remove('active');
+                        
+                        // Mostrar pantalla OTP
+                        loginForm.style.display = 'none';
+                        otpContainer.classList.add('active');
+                        otpMessage.textContent = result.message || 'Ingresa el código de 6 dígitos enviado a tu WhatsApp';
+                        
+                        // Enfocar primer input
+                        otpInputs[0].focus();
+                        
+                        // Iniciar timer
+                        startOTPTimer();
+                    } else {
+                        throw new Error(result.error || 'Error al enviar código OTP');
+                    }
+                } catch (error) {
+                    console.error('Error al enviar OTP:', error);
+                    alert('Error al enviar el código de verificación. Por favor, intenta nuevamente.');
+                    btnSendCode.disabled = false;
+                    btnSendCode.innerHTML = `<i class="fas fa-paper-plane"></i> Enviar código a WhatsApp ****${userWhatsAppLast4}`;
+                }
+            });
+
+            // Cerrar modales al hacer click en el overlay
+            modalWelcome.addEventListener('click', function(e) {
+                if (e.target === modalWelcome) {
+                    // No permitir cerrar haciendo click fuera
+                }
+            });
+
+            modalTerms.addEventListener('click', function(e) {
+                if (e.target === modalTerms) {
+                    modalTerms.classList.remove('active');
+                }
+            });
+
+            return true;
+        }
+
+        // Funciones auxiliares para términos
+        function updateCheckboxState() {
+            if (checkboxAccept && checkboxContainer && btnSendCode) {
+                if (checkboxAccept.checked) {
+                    checkboxContainer.classList.add('checked');
+                    btnSendCode.disabled = false;
+                } else {
+                    checkboxContainer.classList.remove('checked');
+                    btnSendCode.disabled = true;
+                }
+            }
+        }
+
+        function updateScrollIndicator() {
+            if (!termsContent || !scrollIndicator || !btnCloseTerms) return;
+
+            const scrollTop = termsContent.scrollTop;
+            const scrollHeight = termsContent.scrollHeight;
+            const clientHeight = termsContent.clientHeight;
+            
+            // Si llegó al final (con un margen de 50px)
+            if (scrollTop + clientHeight >= scrollHeight - 50) {
+                scrollIndicator.classList.add('completed');
+                scrollIndicator.innerHTML = '<i class="fas fa-check-circle"></i> Has leído todos los términos y condiciones';
+                btnCloseTerms.disabled = false;
+            } else {
+                scrollIndicator.classList.remove('completed');
+                scrollIndicator.innerHTML = '<i class="fas fa-arrow-down"></i> Desplázate hasta el final para continuar';
+                btnCloseTerms.disabled = true;
+            }
+        }
+
+        // Mostrar modal de bienvenida
+        function showWelcomeModal(whatsapp) {
+            if (!modalWelcome || !btnSendCode) {
+                console.error('Elementos de modal no disponibles. Inicializando...');
+                initTermsAndConditions();
+                if (!modalWelcome || !btnSendCode) {
+                    console.error('No se pudieron inicializar los modales');
+                    return;
+                }
+            }
+            userWhatsAppLast4 = whatsapp.slice(-4);
+            btnSendCode.innerHTML = `<i class="fas fa-paper-plane"></i> Enviar código a WhatsApp ****${userWhatsAppLast4}`;
+            modalWelcome.classList.add('active');
+        }
+
+        // Inicializar términos cuando el DOM esté listo
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initTermsAndConditions);
+        } else {
+            // DOM ya está listo
+            setTimeout(initTermsAndConditions, 100);
+        }
     </script>
+
+    <!-- Modal de Bienvenida -->
+    <div id="modal-welcome" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-shield-alt modal-icon"></i> Bienvenido a la Biblioteca Virtual</h2>
+            </div>
+            <div class="modal-body">
+                <div class="welcome-text">
+                    <h3><i class="fas fa-university"></i> CAJA DE AHORRO Y CRÉDITO TUPAK RANTINA</h3>
+                    <p>Estás accediendo a un sistema de información confidencial. Antes de continuar, es importante que conozcas nuestras políticas de seguridad y uso responsable.</p>
+                </div>
+
+                <div class="warning-box">
+                    <p><strong><i class="fas fa-exclamation-triangle"></i> Importante:</strong> Este sistema contiene documentación confidencial protegida por medidas de seguridad avanzadas. El acceso está restringido únicamente a personal autorizado.</p>
+                </div>
+
+                <button id="btn-read-terms" class="btn-read-terms">
+                    <i class="fas fa-file-contract"></i> Leer Términos y Condiciones
+                </button>
+
+                <div class="checkbox-container">
+                    <div class="custom-checkbox">
+                        <input type="checkbox" id="checkbox-accept">
+                        <span class="checkbox-mark"></span>
+                    </div>
+                    <label class="checkbox-label" for="checkbox-accept">
+                        He leído y acepto los <strong>Términos y Condiciones de Uso</strong> de la Biblioteca Virtual de TUPAK RANTINA. Comprendo las medidas de seguridad y me comprometo a mantener la confidencialidad de la información. <strong>Estoy dispuesto(a) a aceptar las consecuencias si incumplo, como se especifica en los Términos y Condiciones.</strong>
+                    </label>
+                </div>
+
+                <button id="btn-send-code" class="btn-send-code" disabled>
+                    <i class="fas fa-paper-plane"></i> Enviar código a WhatsApp ****XXXX
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Términos Completos -->
+    <div id="modal-terms" class="modal-overlay terms-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-file-contract modal-icon"></i> Términos y Condiciones de Uso</h2>
+            </div>
+            <div class="modal-body" id="terms-content">
+                <h3>1. NATURALEZA Y PROPÓSITO DEL SISTEMA</h3>
+                <p>
+                    La Biblioteca Virtual de Documentos es un sistema de información confidencial de uso exclusivo 
+                    para personal autorizado de la Caja de Ahorro y Crédito TUPAK RANTINA. Este sistema contiene 
+                    documentación normativa, operativa y administrativa de carácter <strong>ESTRICTAMENTE CONFIDENCIAL</strong>.
+                </p>
+
+                <h3>2. CONFIDENCIALIDAD Y PROTECCIÓN DE LA INFORMACIÓN</h3>
+                <div class="highlight-box">
+                    <p><i class="fas fa-exclamation-triangle"></i> ADVERTENCIA IMPORTANTE:</p>
+                </div>
+                <p>
+                    Toda la información contenida en este sistema es propiedad exclusiva de la Caja de Ahorro 
+                    y Crédito TUPAK RANTINA y está protegida por las leyes de propiedad intelectual y 
+                    confidencialidad aplicables.
+                </p>
+                <p><strong>El usuario se compromete a:</strong></p>
+                <ul>
+                    <li>Mantener en estricta confidencialidad toda información accedida</li>
+                    <li>No compartir, copiar, reproducir o distribuir ningún documento sin autorización expresa</li>
+                    <li>No divulgar información sensible a terceros, incluyendo familiares o conocidos</li>
+                    <li>Utilizar la información únicamente para fines laborales autorizados</li>
+                    <li>Reportar inmediatamente cualquier acceso no autorizado o brecha de seguridad</li>
+                </ul>
+
+                <h3>3. MECANISMOS DE SEGURIDAD IMPLEMENTADOS</h3>
+                <p>El sistema cuenta con múltiples capas de seguridad para proteger la información:</p>
+                <ul>
+                    <li><strong><i class="fas fa-lock"></i> Autenticación de Doble Factor (2FA):</strong> Verificación mediante código OTP enviado a WhatsApp registrado</li>
+                    <li><strong><i class="fas fa-shield-alt"></i> Protección Anti-Copia:</strong> Deshabilitación de copiar, imprimir y captura de pantalla</li>
+                    <li><strong><i class="fas fa-clock"></i> Sesiones Temporales:</strong> Cierre automático de sesión por inactividad (60 minutos)</li>
+                    <li><strong><i class="fas fa-clipboard-list"></i> Registro de Auditoría:</strong> Todas las acciones quedan registradas con fecha, hora y usuario</li>
+                    <li><strong><i class="fas fa-key"></i> Control de Acceso:</strong> Permisos individuales según rol y función</li>
+                    <li><strong><i class="fab fa-whatsapp"></i> Validación por WhatsApp:</strong> Solo números de WhatsApp autorizados pueden recibir códigos OTP</li>
+                </ul>
+
+                <h3>4. PROHIBICIONES EXPRESAS</h3>
+                <div class="highlight-box">
+                    <p><i class="fas fa-ban"></i> ESTÁ ESTRICTAMENTE PROHIBIDO:</p>
+                </div>
+                <ul>
+                    <li><i class="fas fa-times-circle"></i> Capturar pantallas (screenshots) de los documentos</li>
+                    <li><i class="fas fa-times-circle"></i> Copiar o extraer texto de los documentos</li>
+                    <li><i class="fas fa-times-circle"></i> Imprimir documentos sin autorización expresa de gerencia</li>
+                    <li><i class="fas fa-times-circle"></i> Fotografiar la pantalla con dispositivos móviles u otros medios</li>
+                    <li><i class="fas fa-times-circle"></i> Compartir credenciales de acceso con otras personas</li>
+                    <li><i class="fas fa-times-circle"></i> Acceder al sistema desde equipos públicos o no autorizados</li>
+                    <li><i class="fas fa-times-circle"></i> Intentar eludir o desactivar los mecanismos de seguridad</li>
+                    <li><i class="fas fa-times-circle"></i> Descargar o exportar documentos por cualquier medio no autorizado</li>
+                    <li><i class="fas fa-times-circle"></i> Utilizar herramientas de grabación de pantalla o video</li>
+                    <li><i class="fas fa-times-circle"></i> Dejar el sistema abierto en equipos desatendidos</li>
+                </ul>
+
+                <h3>5. RESPONSABILIDADES DEL USUARIO</h3>
+                <p><strong>Como usuario autorizado, usted es responsable de:</strong></p>
+                <ul>
+                    <li>Mantener la confidencialidad de sus credenciales de acceso</li>
+                    <li>Cerrar sesión al finalizar el uso del sistema</li>
+                    <li>Utilizar el sistema únicamente desde equipos seguros de la institución</li>
+                    <li>Reportar inmediatamente cualquier incidente de seguridad</li>
+                    <li>Actualizar su información de contacto (WhatsApp) cuando sea necesario</li>
+                    <li>Cumplir con todas las políticas de seguridad de la información de la institución</li>
+                    <li>No intentar acceder a información fuera de su autorización</li>
+                </ul>
+
+                <h3>6. REGISTRO Y AUDITORÍA</h3>
+                <p>
+                    <strong>IMPORTANTE:</strong> Todas las actividades en el sistema son registradas y auditadas, incluyendo:
+                </p>
+                <ul>
+                    <li>Fecha y hora de cada inicio de sesión</li>
+                    <li>Documentos consultados y tiempo de visualización</li>
+                    <li>Dirección IP y dispositivo utilizado</li>
+                    <li>Intentos de acceso no autorizados</li>
+                    <li>Cualquier anomalía o comportamiento sospechoso</li>
+                </ul>
+                <p>
+                    Estos registros pueden ser utilizados para fines de auditoría interna, investigaciones de seguridad 
+                    y como evidencia en procedimientos disciplinarios o legales.
+                </p>
+
+                <h3>7. SANCIONES POR INCUMPLIMIENTO</h3>
+                <div class="highlight-box">
+                    <p><i class="fas fa-balance-scale"></i> CONSECUENCIAS LEGALES Y LABORALES:</p>
+                </div>
+                <p>El incumplimiento de estos términos y condiciones puede resultar en:</p>
+                <ul>
+                    <li><strong>Suspensión inmediata</strong> del acceso al sistema</li>
+                    <li><strong>Medidas disciplinarias</strong> según el reglamento interno de trabajo</li>
+                    <li><strong>Acciones legales civiles</strong> por daños y perjuicios</li>
+                    <li><strong>Acciones legales penales</strong> por violación de secreto profesional o empresarial</li>
+                    <li><strong>Responsabilidad económica</strong> por daños causados a la institución</li>
+                    <li><strong>Terminación del contrato laboral</strong> con causa justa</li>
+                </ul>
+
+                <h3>8. PROTECCIÓN DE DATOS PERSONALES</h3>
+                <p>
+                    La Caja de Ahorro y Crédito TUPAK RANTINA se compromete a proteger los datos personales de sus 
+                    usuarios conforme a la legislación vigente. Los datos recopilados (correo electrónico, número de 
+                    WhatsApp, registros de actividad) serán utilizados exclusivamente para:
+                </p>
+                <ul>
+                    <li>Autenticación y control de acceso</li>
+                    <li>Envío de códigos de verificación OTP</li>
+                    <li>Auditoría y seguridad del sistema</li>
+                    <li>Cumplimiento de obligaciones legales y regulatorias</li>
+                </ul>
+
+                <h3>9. ACEPTACIÓN DE TÉRMINOS</h3>
+                <div class="highlight-box">
+                    <p>Al hacer clic en "Acepto los Términos y Condiciones", usted declara que:</p>
+                </div>
+                <ul>
+                    <li><i class="fas fa-check"></i> Ha leído completamente estos términos y condiciones</li>
+                    <li><i class="fas fa-check"></i> Comprende todas las disposiciones y restricciones establecidas</li>
+                    <li><i class="fas fa-check"></i> Acepta cumplir con todas las obligaciones y prohibiciones</li>
+                    <li><i class="fas fa-check"></i> Reconoce las consecuencias del incumplimiento</li>
+                    <li><i class="fas fa-check"></i> Se compromete a mantener la confidencialidad de toda información accedida</li>
+                </ul>
+
+                <div style="border: 2px solid #2c5282; padding: 15px; background-color: #ebf8ff; margin-top: 30px; border-radius: 8px;">
+                    <h3 style="margin-top: 0; color: #2c5282; text-align: center;">
+                        <i class="fas fa-phone-alt"></i> CONTACTO Y SOPORTE
+                    </h3>
+                    <p style="text-align: center;">
+                        Para consultas sobre estos términos, problemas de acceso o reportar incidentes de seguridad, 
+                        contacte al Departamento de Sistemas de TUPAK RANTINA.
+                    </p>
+                </div>
+
+                <div style="text-align: center; margin-top: 30px; padding: 20px; background-color: #f7fafc; border-radius: 5px;">
+                    <p style="font-size: 0.9em; color: #718096;">
+                        <strong>Última actualización:</strong> Octubre 2025<br>
+                        © 2025 Caja de Ahorro y Crédito TUPAK RANTINA - Todos los derechos reservados
+                    </p>
+                </div>
+            </div>
+            <div id="scroll-indicator" class="scroll-indicator">
+                <i class="fas fa-arrow-down"></i> Desplázate hasta el final para continuar
+            </div>
+            <div style="padding: 20px; background: white; border-radius: 0 0 16px 16px;">
+                <button id="btn-close-terms" class="btn-close-terms" disabled>
+                    <i class="fas fa-check-circle"></i> Acepto Términos y Condiciones
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
