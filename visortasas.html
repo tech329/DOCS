@@ -1,0 +1,952 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+<title>Tasas de Interés - Junta de Política y Regulación Financiera</title>
+<meta name="description" content="Tasas de interés activas y pasivas efectivas - Información regulatoria oficial">
+<meta name="robots" content="noindex, nofollow">
+<meta name="author" content="Junta de Política y Regulación Financiera y Monetaria">
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+  :root{
+    --primary: #001749;
+    --secondary: #e48410;
+    --accent: #3787c6;
+    --blue: #015cd0;
+    --bg-light: #f5f7fa;
+    --text-dark: #2c3e50;
+    --text-gray: #6c757d;
+    --white: #ffffff;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    background: var(--bg-light);
+    font-family: 'Segoe UI', system-ui, Roboto, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  @media print {
+    body { display: none !important; }
+    * { content: "DOCUMENTO PROTEGIDO - IMPRESIÓN NO AUTORIZADA" !important; color: red !important; }
+  }
+
+  /* HEADER FIJO */
+  .top-header {
+    background: var(--primary);
+    color: white;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+
+  .header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .btn-back {
+    background: rgba(255,255,255,0.15);
+    color: white;
+    border: 2px solid rgba(255,255,255,0.3);
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 0.95em;
+  }
+
+  .btn-refresh {
+    background: rgba(255,255,255,0.15);
+    color: white;
+    border: 2px solid rgba(255,255,255,0.3);
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+  }
+
+  .btn-refresh:hover {
+    background: rgba(255,255,255,0.25);
+    border-color: rgba(255,255,255,0.6);
+    transform: rotate(180deg);
+  }
+
+  .btn-refresh.refreshing {
+    animation: spin 1s linear infinite;
+  }
+
+  .btn-refresh.refreshing i {
+    animation: none;
+  }
+
+  .header-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .header-title h1 {
+    font-size: 1.5em;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .live-indicator {
+    background: #ff4444;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.7em;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    animation: pulse 2s infinite;
+  }
+
+  .live-indicator i {
+    font-size: 0.6em;
+    animation: blink 1s infinite;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0.5; }
+  }
+
+  .header-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 0.9em;
+    opacity: 0.9;
+  }
+
+  .info-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* CONTENEDOR PRINCIPAL */
+  .main-container {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+    overflow: hidden;
+  }
+
+  /* CONTENIDO DEL DOCUMENTO */
+  .document-content {
+    background: white;
+    border-radius: 8px;
+    padding: 40px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .document-content::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .document-content::-webkit-scrollbar-track {
+    background: var(--bg-light);
+    border-radius: 4px;
+  }
+
+  .document-content::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 4px;
+  }
+
+  .document-content::-webkit-scrollbar-thumb:hover {
+    background: var(--blue);
+  }
+
+  /* LOADER */
+  .loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--bg-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+  }
+
+  .loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .loader-spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid var(--bg-light);
+    border-top: 4px solid var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .loader-text {
+    color: var(--primary);
+    font-size: 1.1em;
+    font-weight: 600;
+  }
+
+  /* ESTILOS DEL CONTENIDO */
+  .document-content h1,
+  .document-content h2,
+  .document-content h3 {
+    color: var(--primary);
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-weight: 700;
+  }
+
+  .document-content h1 {
+    font-size: 2em;
+    border-bottom: 3px solid var(--secondary);
+    padding-bottom: 10px;
+    margin-top: 0;
+  }
+
+  .document-content h2 {
+    font-size: 1.5em;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 8px;
+  }
+
+  .document-content h3 {
+    font-size: 1.2em;
+    color: var(--text-dark);
+  }
+
+  .document-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .document-content th,
+  .document-content td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+
+  .document-content th {
+    background: var(--primary);
+    color: white;
+    font-weight: 600;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .document-content tr:nth-child(even) {
+    background: #f8f9fa;
+  }
+
+  .document-content tr:hover {
+    background: #e3f2fd;
+  }
+
+  /* Resaltado especial para filas de microcrédito */
+  .document-content tr.microcredito {
+    background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+    border-left: 4px solid #f39c12;
+    font-weight: 600;
+  }
+
+  .document-content tr.microcredito:hover {
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+    color: white;
+  }
+
+  .document-content tr.microcredito td:first-child {
+    color: #d68910;
+  }
+
+  .document-content tr.microcredito:hover td:first-child {
+    color: white;
+  }
+
+  /* Contenedor para scroll horizontal en móviles */
+  .table-container {
+    overflow-x: auto;
+    margin: 20px 0;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .table-container table {
+    min-width: 600px;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .document-content p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: var(--text-dark);
+  }
+
+  .document-content a {
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .document-content a:hover {
+    text-decoration: underline;
+  }
+
+  /* Indicador de actualización */
+  .update-info {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9em;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  .update-info i {
+    opacity: 0.9;
+  }
+
+  /* Mensaje de éxito */
+  .success-message {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    background: #4caf50;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    z-index: 10000;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+  }
+
+  .success-message.show {
+    transform: translateX(0);
+  }
+
+  .success-message i {
+    font-size: 1.2em;
+  }
+
+  /* MARCA DE AGUA */
+  .watermark {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: 100;
+    transform: rotate(-45deg);
+  }
+
+  .watermark .tile {
+    background: var(--primary);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-weight: 600;
+    display: inline-block;
+  }
+
+  .watermark .label {
+    margin-top: 5px;
+    font-size: 0.7em;
+    color: var(--text-gray);
+    text-align: center;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .header-content {
+      padding: 15px 20px;
+      flex-direction: column;
+      gap: 15px;
+      align-items: flex-start;
+    }
+
+    .header-title h1 {
+      font-size: 1.2em;
+    }
+
+    .live-indicator {
+      font-size: 0.6em;
+      padding: 3px 6px;
+    }
+
+    .header-info {
+      font-size: 0.8em;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+
+    .main-container {
+      padding: 20px 15px;
+      top: 100px; /* Ajustar por header más alto en móvil */
+    }
+
+    .document-content {
+      padding: 20px 15px;
+    }
+
+    /* Tablas responsive */
+    .document-content table {
+      font-size: 0.85em;
+      min-width: 600px; /* Forzar scroll horizontal */
+      margin: 15px -15px; /* Extender a los bordes */
+      border-radius: 0;
+    }
+
+    .document-content th,
+    .document-content td {
+      padding: 6px 8px;
+      white-space: nowrap;
+    }
+
+    .document-content th {
+      font-size: 0.75em;
+      padding: 8px 6px;
+    }
+
+    /* Scroll horizontal para tablas */
+    .table-container {
+      overflow-x: auto;
+      margin: 20px 0;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .table-container table {
+      margin: 0;
+      min-width: 600px;
+    }
+
+    /* Mejorar legibilidad en móvil */
+    .document-content h1 {
+      font-size: 1.5em;
+    }
+
+    .document-content h2 {
+      font-size: 1.2em;
+    }
+
+    .document-content h3 {
+      font-size: 1.1em;
+    }
+
+    .document-content p {
+      font-size: 0.95em;
+      line-height: 1.5;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .header-content {
+      padding: 10px 15px;
+    }
+
+    .header-title h1 {
+      font-size: 1.1em;
+    }
+
+    .btn-back {
+      padding: 8px 15px;
+      font-size: 0.9em;
+    }
+
+    .main-container {
+      padding: 15px 10px;
+      top: 90px;
+    }
+
+    .document-content {
+      padding: 15px 10px;
+    }
+
+    .document-content table {
+      font-size: 0.8em;
+      min-width: 700px; /* Más ancho para mejor legibilidad */
+    }
+
+    .document-content th,
+    .document-content td {
+      padding: 4px 6px;
+    }
+
+    .watermark {
+      display: none; /* Ocultar marca de agua en móviles muy pequeños */
+    }
+  }
+</style>
+</head>
+<body>
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="loader-spinner"></div>
+  <div class="loader-text" id="loaderText">Obteniendo tasas actualizadas...</div>
+</div>
+
+<!-- HEADER -->
+<header class="top-header">
+  <div class="header-content">
+    <div class="header-left">
+      <a href="index.html" class="btn-back">
+        <i class="fas fa-arrow-left"></i>
+        Volver a Biblioteca
+      </a>
+      <div class="header-title">
+        <i class="fas fa-chart-line"></i>
+        <h1>Tasas de Interés</h1>
+        <span class="live-indicator">
+          <i class="fas fa-circle"></i> EN VIVO
+        </span>
+      </div>
+      <button class="btn-refresh" onclick="refreshData()" title="Actualizar datos">
+        <i class="fas fa-sync-alt"></i>
+      </button>
+    </div>
+    <div class="header-info">
+      <div class="info-item">
+        <i class="fas fa-calendar"></i>
+        <span id="dateInfo">Octubre 2025</span>
+      </div>
+      <div class="info-item">
+        <i class="fas fa-clock"></i>
+        <span id="clockInfo">--:--:--</span>
+      </div>
+      <div class="info-item">
+        <i class="fas fa-building"></i>
+        <span>Junta de Política y Regulación Financiera</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- CONTENIDO PRINCIPAL -->
+<div class="main-container">
+  <main class="document-content" id="documentContent">
+    <!-- Se llenará dinámicamente -->
+  </main>
+</div>
+
+<!-- MARCA DE AGUA -->
+<div class="watermark">
+  <div class="tile" id="wmTile"></div>
+  <div class="label">
+    <span id="wmUser">Usuario</span>
+    <span class="separator">•</span>
+    <span id="wmClock">--:--:--</span>
+    <span class="separator">•</span>
+    <span>Tasas de Interés</span>
+    <span class="separator">•</span>
+    Sesión <span id="wmSess">---</span>
+  </div>
+</div>
+
+<script>
+// ==========================================
+// CONFIGURACIÓN Y CONSTANTES
+// ==========================================
+const SESSION_ID = Math.random().toString(36).substr(2, 9).toUpperCase();
+const USER_EMAIL = 'usuario@tupakrantina.com';
+const DEBUG_MODE = false; // Cambiar a true solo para debugging
+
+// ==========================================
+// SISTEMA DE SEGURIDAD ANTICOPIA
+// ==========================================
+function logSecurityEvent(description) {
+  if (window.TupakAuth && window.TupakAuth.logUserAction) {
+    window.TupakAuth.logUserAction(description);
+  }
+}
+
+function initSecurityProtections() {
+  document.addEventListener('contextmenu', e => {
+    e.preventDefault();
+    logSecurityEvent('Intento: Clic derecho (bloqueado)');
+    return false;
+  });
+
+  document.addEventListener('selectstart', e => { e.preventDefault(); return false; });
+
+  document.addEventListener('copy', e => {
+    e.preventDefault();
+    logSecurityEvent('Intento: Copiar texto (bloqueado)');
+    return false;
+  });
+
+  document.addEventListener('cut', e => {
+    e.preventDefault();
+    logSecurityEvent('Intento: Cortar texto (bloqueado)');
+    return false;
+  });
+
+  document.addEventListener('dragstart', e => { e.preventDefault(); return false; });
+
+  document.addEventListener('keydown', function(e) {
+    // Detectar PrintScreen
+    if (e.key === 'PrintScreen' || e.keyCode === 44) {
+      logSecurityEvent('Intento: Captura de pantalla con PrintScreen');
+    }
+
+    // Bloquear F12
+    if (e.key === 'F12' || e.keyCode === 123) {
+      e.preventDefault();
+      e.stopPropagation();
+      logSecurityEvent('Intento: Abrir DevTools con F12 (bloqueado)');
+      return false;
+    }
+
+    // Bloquear Ctrl+U (ver código fuente)
+    if (e.ctrlKey && e.key === 'u') {
+      e.preventDefault();
+      logSecurityEvent('Intento: Ver código fuente con Ctrl+U (bloqueado)');
+      return false;
+    }
+
+    // Bloquear Ctrl+Shift+I (DevTools)
+    if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+      e.preventDefault();
+      logSecurityEvent('Intento: Abrir DevTools con Ctrl+Shift+I (bloqueado)');
+      return false;
+    }
+
+    // Bloquear Ctrl+S (guardar)
+    if (e.ctrlKey && e.key === 's') {
+      e.preventDefault();
+      logSecurityEvent('Intento: Guardar página con Ctrl+S (bloqueado)');
+      return false;
+    }
+  });
+
+  // Detectar apertura de DevTools
+  let devtoolsOpen = false;
+  const detectDevTools = () => {
+    if (window.outerHeight - window.innerHeight > 200 || window.outerWidth - window.innerWidth > 200) {
+      if (!devtoolsOpen) {
+        devtoolsOpen = true;
+        logSecurityEvent('DevTools detectado abierto');
+      }
+    } else {
+      devtoolsOpen = false;
+    }
+  };
+
+  setInterval(detectDevTools, 500);
+  setInterval(() => console.clear(), 2000);
+}
+
+// ==========================================
+// FUNCIONES PRINCIPALES
+// ==========================================
+function updateClock() {
+  const now = new Date();
+  const timeString = now.toLocaleTimeString('es-PE', { hour12: false });
+  document.getElementById('clockInfo').textContent = timeString;
+  document.getElementById('wmClock').textContent = timeString;
+}
+
+function updateDate() {
+  const now = new Date();
+  const dateString = now.toLocaleDateString('es-ES', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+  document.getElementById('dateInfo').textContent = dateString;
+
+  // Actualizar título dinámicamente con mes y año actuales
+  const monthYear = now.toLocaleDateString('es-ES', {
+    year: 'numeric',
+    month: 'long'
+  });
+  document.title = `Tasas de Interés - ${monthYear}`;
+}
+
+function showSuccessMessage(message) {
+  // Crear mensaje de éxito
+  const successMsg = document.createElement('div');
+  successMsg.className = 'success-message';
+  successMsg.innerHTML = `
+    <i class="fas fa-check-circle"></i>
+    <span>${message}</span>
+  `;
+
+  document.body.appendChild(successMsg);
+
+  // Mostrar y ocultar automáticamente
+  setTimeout(() => {
+    successMsg.classList.add('show');
+  }, 100);
+
+  setTimeout(() => {
+    successMsg.classList.remove('show');
+    setTimeout(() => {
+      if (successMsg.parentNode) {
+        successMsg.parentNode.removeChild(successMsg);
+      }
+    }, 300);
+  }, 3000);
+}
+
+// Configuración del webhook
+const WEBHOOK_URL = 'https://lpwebhook.luispinta.com/webhook/a6201dfd-ee3e-4af3-8875-d54b5ee5e2cb';
+
+async function loadMarkdown(retryCount = 0, isManualRefresh = false) {
+  try {
+    console.log(`Conectando al webhook... (intento ${retryCount + 1})`);
+
+    const response = await fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({})
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    const responseText = await response.text();
+    console.log('Respuesta recibida, procesando...');
+
+    let markdown;
+
+    // Intentar extraer markdown de diferentes formatos
+    try {
+      const data = JSON.parse(responseText);
+      markdown = data[0]?.data || data.data || responseText;
+    } catch {
+      markdown = responseText; // Usar como texto plano si no es JSON
+    }
+
+    // Procesar y mostrar
+    // Primero limpiar código condicional de Office
+    const cleanMarkdown = cleanOfficeMarkup(markdown);
+    // Luego convertir numeraciones en el markdown plano
+    const listMarkdown = convertToOrderedList(cleanMarkdown);
+    const superscriptMarkdown = convertToSuperscript(listMarkdown);
+
+    // Luego parsear el markdown procesado
+    const html = marked.parse(superscriptMarkdown);
+    let processedHtml = html.replace(/<table/g, '<div class="table-container"><table').replace(/<\/table>/g, '</table></div>');
+
+    // Limpiar <sup> tags de los hrefs de enlaces HTML (tanto normales como codificados en URL)
+    processedHtml = processedHtml.replace(/href="([^"]*?)"/g, (match, url) => {
+      let cleanUrl = url;
+      // Limpiar tags HTML normales
+      cleanUrl = cleanUrl.replace(/<sup>/g, '').replace(/<\/sup>/g, '');
+      // Limpiar tags HTML codificados en URL
+      cleanUrl = cleanUrl.replace(/%3Csup%3E/g, '').replace(/%3C\/sup%3E/g, '');
+      return `href="${cleanUrl}"`;
+    });
+
+    // Agregar target="_blank" a todos los enlaces después del parsing
+    processedHtml = processedHtml.replace(/<a /g, '<a target="_blank" ');
+
+    // Resaltar filas de microcrédito
+    processedHtml = processedHtml.replace(
+      /<tr>\s*<td[^>]*>([^<]*Microcrédito[^<]*)<\/td>/gi,
+      '<tr class="microcredito"><td>$1</td>'
+    );
+
+    // Función para convertir números después de palabras en superíndices
+    function convertToSuperscript(text) {
+      // Patrón: letra seguida inmediatamente de uno o más dígitos
+      return text.replace(/([a-zA-ZáéíóúÁÉÍÓÚñÑ])([0-9]+)/g, '$1<sup>$2</sup>');
+    }
+
+    // Función para procesar enlaces y limpiar superíndices en URLs
+    function processLinks(text) {
+      // Esta función se ejecuta después de convertToSuperscript
+      // Busca enlaces markdown [texto](url) y limpia <sup> tags de las URLs
+      return text.replace(/\[([^\]]*)\]\(([^)]*)\)/g, (match, text, url) => {
+        // Limpiar <sup> tags de la URL
+        const cleanUrl = url.replace(/<sup>/g, '').replace(/<\/sup>/g, '');
+        return `[${text}](${cleanUrl})`;
+      });
+    }
+
+    // Función para convertir numeración con puntos en listas ordenadas
+    function convertToOrderedList(text) {
+      // Convertir " 1. ", " 2. ", etc. en "-\n" para crear listas simples con guiones
+      return text.replace(/\s\d+\.\s+/g, '-\n');
+    }
+
+    // Función para limpiar código condicional de Office
+    function cleanOfficeMarkup(text) {
+      // Eliminar líneas con código condicional de Microsoft Office (con caracteres escapados)
+      return text.replace(/<!\\\[.*?\\\]>/g, '').replace(/<!\\\[endif\\\]>/g, '').trim();
+    }
+
+    const updateInfo = `<div class="update-info"><i class="fas fa-clock"></i> Actualizado: ${new Date().toLocaleString('es-ES')}</div>`;
+    document.getElementById('documentContent').innerHTML = updateInfo + processedHtml;
+
+    if (isManualRefresh) showSuccessMessage('Actualizado');
+
+    setTimeout(() => document.getElementById('loader').classList.add('hidden'), 500);
+
+  } catch (error) {
+    console.error('Error:', error.message);
+
+    if (retryCount < 2) { // Solo 2 reintentos
+      document.getElementById('loaderText').textContent = `Reintentando... (${retryCount + 1}/2)`;
+      setTimeout(() => loadMarkdown(retryCount + 1, isManualRefresh), 1500);
+      return;
+    }
+
+    // Error final
+    document.getElementById('loader').innerHTML = `
+      <div style="text-align: center; color: var(--primary);">
+        <i class="fas fa-exclamation-triangle" style="font-size: 3em;"></i>
+        <div class="loader-text">Error de conexión</div>
+        <button onclick="location.reload()" style="margin-top: 15px; padding: 8px 16px; background: var(--primary); color: white; border: none; border-radius: 4px;">
+          Reintentar
+        </button>
+      </div>
+    `;
+  }
+}
+
+// Función de debug para probar el webhook desde la consola
+window.testWebhook = async function() {
+  console.log('🧪 Probando conexión al webhook...');
+
+  try {
+    const response = await fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({})
+    });
+
+    console.log('📡 Status:', response.status);
+    console.log('📡 Headers:', Object.fromEntries(response.headers.entries()));
+
+    const text = await response.text();
+    console.log('📄 Respuesta completa:', text);
+
+    try {
+      const json = JSON.parse(text);
+      console.log('🔍 JSON parseado:', json);
+    } catch (e) {
+      console.log('⚠️ No es JSON válido');
+    }
+
+  } catch (error) {
+    console.error('❌ Error en test:', error);
+  }
+};
+
+// Hacer la función disponible globalmente
+window.testWebhookDirect = window.testWebhook;
+document.addEventListener('DOMContentLoaded', function() {
+  // Inicializar marca de agua
+  document.getElementById('wmSess').textContent = SESSION_ID;
+  document.getElementById('wmUser').textContent = USER_EMAIL.split('@')[0];
+
+  // Inicializar protecciones de seguridad
+  initSecurityProtections();
+
+  // Actualizar reloj y fecha
+  updateClock();
+  updateDate();
+  setInterval(updateClock, 1000);
+
+  // Cargar contenido
+  loadMarkdown();
+});
+</script>
+</body>
+</html>
