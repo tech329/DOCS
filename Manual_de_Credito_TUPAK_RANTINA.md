@@ -374,13 +374,14 @@ El **Administrador** podrá autorizar las siguientes excepciones:
 ### a) Firma del cónyuge en el pagaré
 - En créditos solicitados hasta **USD 400**
 
-### b) Endeudamiento
+### c) Endeudamiento
 Se podrá aprobar un exceso temporal de corto plazo en el cupo de crédito cuando:
 - El socio mantenga un nivel de endeudamiento moderado en el sistema
+- La Caja de Ahorro podrá aceptar la posición de tercer acreedor sobre el nivel de endeudamiento reflejado en el reporte crediticio
 - Su capacidad de pago permita hacer frente a la nueva obligación
 - No afecte su liquidez
 
-### c) Antecedentes de morosidad
+### d) Antecedentes de morosidad
 
 Se puede exceptuar la concesión de un crédito con antecedentes de morosidad por:
 
@@ -607,3 +608,4 @@ El presente manual de la **Caja de Ahorro y Crédito Tupak Rantina** fue aprobad
 ---
 
 *Este documento es de carácter interno y confidencial. Su distribución está restringida al personal autorizado de la Caja de Ahorro y Crédito TUPAK RANTINA.*
+
