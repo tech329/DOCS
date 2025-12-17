@@ -18,9 +18,9 @@ const WHATSAPP_API_URL = 'https://api.luispinta.com/message/sendText/CajaGerenci
 const WHATSAPP_API_KEY = 'smaksnaHG';
 
 // Crear instancia de Supabase
-let supabase;
+let supabaseClient = null;
 if (typeof window.supabase !== 'undefined') {
-    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
         auth: {
             persistSession: true, // CAMBIO: Activar persistencia de sesión
             autoRefreshToken: true,
@@ -28,7 +28,7 @@ if (typeof window.supabase !== 'undefined') {
         }
     });
 
-    supabase.auth.onAuthStateChange((event, session) => {
+    supabaseClient.auth.onAuthStateChange((event, session) => {
         if (session) {
             storeSupabaseSession(session);
         } else {
@@ -97,14 +97,14 @@ function storeSupabaseSession(session) {
 }
 
 async function ensureSupabaseSession() {
-    if (!supabase) {
+    if (!supabaseClient) {
         console.error('❌ Supabase no está inicializado');
         return false;
     }
 
     try {
         // Primero verificar si ya hay una sesión activa
-        const { data, error } = await supabase.auth.getSession();
+        const { data, error } = await supabaseClient.auth.getSession();
 
         if (error) {
             console.error('❌ Error al obtener sesión de Supabase:', error);
@@ -132,7 +132,7 @@ async function ensureSupabaseSession() {
         }
 
         // Restaurar la sesión con los tokens
-        const { data: sessionData, error: sessionError } = await supabase.auth.setSession({
+        const { data: sessionData, error: sessionError } = await supabaseClient.auth.setSession({
             access_token: tokens.access_token,
             refresh_token: tokens.refresh_token
         });
@@ -176,7 +176,7 @@ function checkSessionTimeout() {
 // ===== VERIFICACIÓN DE PERMISOS EN DOCSUSERSTR =====
 async function checkUserPermissions(email) {
     try {
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
             .from('docsuserstr')
             .select('*')
             .eq('correo', email)
@@ -206,13 +206,13 @@ async function logUserLogin(userId, email, documentoAbierto = 'Sin especificar')
         await ensureSupabaseSession();
 
         // Verificar que tenemos una sesión activa
-        const { data: sessionData } = await supabase.auth.getSession();
+        const { data: sessionData } = await supabaseClient.auth.getSession();
         if (!sessionData?.session) {
             console.error('❌ No hay sesión activa de Supabase');
             return false;
         }
 
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
             .from('user_logins')
             .insert([
                 {
@@ -337,7 +337,7 @@ async function logUserAction(accion) {
         }
 
         // Verificar una vez más que tenemos una sesión activa
-        const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+        const { data: sessionData, error: sessionError } = await supabaseClient.auth.getSession();
         if (sessionError) {
             console.error('❌ Error verificando sesión:', sessionError);
             return false;
@@ -348,7 +348,7 @@ async function logUserAction(accion) {
             return false;
         }
 
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
             .from('user_logins')
             .insert([
                 {
@@ -380,7 +380,7 @@ async function logUserAction(accion) {
 async function login(email, password) {
     try {
         // 1. Autenticar con Supabase
-        const { data, error } = await supabase.auth.signInWithPassword({
+        const { data, error } = await supabaseClient.auth.signInWithPassword({
             email: email,
             password: password
         });
@@ -398,7 +398,7 @@ async function login(email, password) {
 
         if (!hasPermission) {
             // Cerrar sesión de Supabase si no tiene permisos
-            await supabase.auth.signOut();
+            await supabaseClient.auth.signOut();
             return {
                 success: false,
                 error: 'No cuentas con los permisos suficientes para acceder a este sistema.'
@@ -407,7 +407,7 @@ async function login(email, password) {
 
         // 3. Verificar que el usuario tenga WhatsApp configurado
         if (!userData.whatsapp) {
-            await supabase.auth.signOut();
+            await supabaseClient.auth.signOut();
             return {
                 success: false,
                 error: 'No tienes un número de WhatsApp configurado. Contacta al administrador.'
@@ -421,7 +421,7 @@ async function login(email, password) {
         const sendResult = await sendOTPWhatsApp(userData.whatsapp, otp, userData.nombre);
 
         if (!sendResult.success) {
-            await supabase.auth.signOut();
+            await supabaseClient.auth.signOut();
             return {
                 success: false,
                 error: 'No se pudo enviar el código de verificación. Intenta nuevamente.'
@@ -469,7 +469,7 @@ async function verifyOTPAndLogin(inputOTP) {
         }
 
         // 3. La sesión de Supabase ya está activa, solo verificamos que siga válida
-        const { data: { session }, error } = await supabase.auth.getSession();
+        const { data: { session }, error } = await supabaseClient.auth.getSession();
 
         if (error || !session) {
             console.error('Error al verificar sesión:', error);
@@ -505,7 +505,7 @@ async function verifyOTPAndLogin(inputOTP) {
 async function logout() {
     try {
         // Cerrar sesión en Supabase
-        await supabase.auth.signOut();
+        await supabaseClient.auth.signOut();
 
         // Limpiar sesión local
         clearSession();
@@ -572,8 +572,8 @@ async function requireAuth() {
 
     // 5. VERIFICACIÓN CRÍTICA: Validar con Supabase que la sesión sigue siendo válida
     try {
-        if (supabase) {
-            const { data, error } = await supabase.auth.getSession();
+        if (supabaseClient) {
+            const { data, error } = await supabaseClient.auth.getSession();
 
             if (error || !data?.session) {
                 console.log('⚠️ Sesión de Supabase no válida - redirigiendo a login');
