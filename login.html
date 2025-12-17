@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,7 +34,7 @@
         .login-container {
             background: white;
             border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             overflow: hidden;
             max-width: 1000px;
             width: 100%;
@@ -104,7 +105,7 @@
         }
 
         .feature-icon {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
             width: 45px;
             height: 45px;
             border-radius: 50%;
@@ -209,7 +210,7 @@
             display: none;
             width: 20px;
             height: 20px;
-            border: 3px solid rgba(255,255,255,0.3);
+            border: 3px solid rgba(255, 255, 255, 0.3);
             border-top-color: white;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
@@ -220,7 +221,9 @@
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         .error-message {
@@ -266,8 +269,15 @@
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
         }
 
         .otp-header h2 {
@@ -319,9 +329,19 @@
         }
 
         @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            75% {
+                transform: translateX(5px);
+            }
         }
 
         .otp-actions {
@@ -414,6 +434,7 @@
                 opacity: 0;
                 transform: translateY(-10px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -484,8 +505,13 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         .modal-content {
@@ -497,15 +523,16 @@
             display: flex;
             flex-direction: column;
             animation: slideUp 0.3s ease;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
         }
 
         @keyframes slideUp {
-            from { 
+            from {
                 opacity: 0;
                 transform: translateY(30px);
             }
-            to { 
+
+            to {
                 opacity: 1;
                 transform: translateY(0);
             }
@@ -636,7 +663,7 @@
             transition: all 0.3s ease;
         }
 
-        .custom-checkbox input[type="checkbox"]:checked ~ .checkbox-mark {
+        .custom-checkbox input[type="checkbox"]:checked~.checkbox-mark {
             background: #28a745;
             border-color: #28a745;
         }
@@ -654,7 +681,7 @@
             transform: rotate(45deg);
         }
 
-        .custom-checkbox input[type="checkbox"]:checked ~ .checkbox-mark::after {
+        .custom-checkbox input[type="checkbox"]:checked~.checkbox-mark::after {
             display: block;
         }
 
@@ -791,8 +818,15 @@
         }
 
         @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
         }
 
         .btn-close-terms {
@@ -857,6 +891,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="login-container">
         <!-- Lado Izquierdo -->
@@ -867,7 +902,7 @@
                 </div>
                 <h1>Biblioteca Digital</h1>
                 <p>Accede a los manuales y recursos institucionales de TUPAK RANTINA</p>
-                
+
                 <div class="features">
                     <div class="feature-item">
                         <div class="feature-icon">
@@ -915,13 +950,8 @@
                     <label for="email">Correo Electrónico</label>
                     <div class="input-wrapper">
                         <i class="fas fa-envelope input-icon"></i>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            class="form-control" 
-                            placeholder="usuario@tupakrantina.com"
-                            required
-                            autocomplete="email">
+                        <input type="email" id="email" class="form-control" placeholder="usuario@tupakrantina.com"
+                            required autocomplete="email">
                     </div>
                 </div>
 
@@ -929,12 +959,7 @@
                     <label for="password">Contraseña</label>
                     <div class="input-wrapper">
                         <i class="fas fa-lock input-icon"></i>
-                        <input 
-                            type="password" 
-                            id="password" 
-                            class="form-control" 
-                            placeholder="••••••••"
-                            required
+                        <input type="password" id="password" class="form-control" placeholder="••••••••" required
                             autocomplete="current-password">
                     </div>
                 </div>
@@ -997,14 +1022,14 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <!-- Sistema de Autenticación -->
     <script src="auth.js"></script>
-    
+
     <script>
         // ==========================================
         // PROTECCIONES DE SEGURIDAD DESACTIVADAS EN LOGIN
         // ==========================================
         // Las protecciones están desactivadas en la página de login para permitir debugging
         // Se activan automáticamente en las páginas internas del sistema
-        
+
         // document.addEventListener('contextmenu', e => { e.preventDefault(); return false; });
         // document.addEventListener('selectstart', e => { e.preventDefault(); return false; });
         // document.addEventListener('copy', e => { e.preventDefault(); return false; });
@@ -1020,9 +1045,9 @@
         // ==========================================
         // Función auxiliar para obtener supabase desde el contexto global de auth.js
         function getSupabase() {
-            // Esperar a que auth.js cargue y exponga supabase
-            if (typeof supabase !== 'undefined') {
-                return supabase;
+            // Esperar a que auth.js cargue y exponga supabaseClient
+            if (typeof supabaseClient !== 'undefined' && supabaseClient !== null) {
+                return supabaseClient;
             }
             throw new Error('Supabase no está disponible. Verifica que auth.js esté cargado.');
         }
@@ -1076,7 +1101,7 @@
 
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const email = emailInput.value.trim();
             const password = passwordInput.value;
 
@@ -1091,7 +1116,7 @@
 
             try {
                 const supabaseClient = getSupabase();
-                
+
                 // Primero validamos credenciales pero NO enviamos OTP aún
                 const { data, error } = await supabaseClient.auth.signInWithPassword({
                     email: email,
@@ -1135,7 +1160,7 @@
                 btnLogin.classList.remove('loading');
                 btnLogin.disabled = false;
                 showWelcomeModal(userData.whatsapp);
-                
+
             } catch (error) {
                 console.error('Error en login:', error);
                 showError(error.message || 'Credenciales incorrectas');
@@ -1156,7 +1181,7 @@
                 if (value) {
                     input.classList.add('filled');
                     input.classList.remove('error');
-                    
+
                     // Avanzar al siguiente input
                     if (index < otpInputs.length - 1) {
                         otpInputs[index + 1].focus();
@@ -1177,12 +1202,12 @@
             input.addEventListener('paste', (e) => {
                 e.preventDefault();
                 const pastedData = e.clipboardData.getData('text').toUpperCase().replace(/[^A-Z0-9]/g, '');
-                
+
                 for (let i = 0; i < pastedData.length && index + i < otpInputs.length; i++) {
                     otpInputs[index + i].value = pastedData[i];
                     otpInputs[index + i].classList.add('filled');
                 }
-                
+
                 const lastFilledIndex = Math.min(index + pastedData.length, otpInputs.length - 1);
                 otpInputs[lastFilledIndex].focus();
             });
@@ -1193,7 +1218,7 @@
         // ==========================================
         btnVerifyOTP.addEventListener('click', async () => {
             const otp = Array.from(otpInputs).map(input => input.value).join('');
-            
+
             if (otp.length !== 6) {
                 showError('Por favor, ingresa los 6 dígitos del código');
                 return;
@@ -1209,10 +1234,10 @@
                     // Mostrar mensaje de éxito
                     successMessage.classList.add('show');
                     welcomeUser.textContent = `¡Bienvenido ${result.user.userData.nombre}!`;
-                    
+
                     // Registrar login exitoso
                     await window.TupakAuth.logUserLogin(result.user.id, result.user.email, 'Login exitoso con OTP');
-                    
+
                     // Redirigir después de 2 segundos
                     setTimeout(() => {
                         window.location.href = 'index.html';
@@ -1252,14 +1277,14 @@
                     errorMessage.style.background = '#d4edda';
                     errorMessage.style.color = '#155724';
                     errorMessage.style.borderColor = '#28a745';
-                    
+
                     // Limpiar inputs
                     otpInputs.forEach(input => {
                         input.value = '';
                         input.classList.remove('filled', 'error');
                     });
                     otpInputs[0].focus();
-                    
+
                     // Reiniciar timer
                     startOTPTimer();
                     startResendCooldown();
@@ -1284,13 +1309,13 @@
                 timeLeft--;
                 const minutes = Math.floor(timeLeft / 60);
                 const seconds = timeLeft % 60;
-                
+
                 otpTimer.textContent = `Código válido por: ${minutes}:${seconds.toString().padStart(2, '0')}`;
-                
+
                 if (timeLeft <= 60) {
                     otpTimer.classList.add('warning');
                 }
-                
+
                 if (timeLeft <= 0) {
                     clearInterval(otpTimerInterval);
                     showError('El código ha expirado. Por favor, solicita uno nuevo.');
@@ -1312,7 +1337,7 @@
             resendCooldown = setInterval(() => {
                 cooldown--;
                 btnResendOTP.innerHTML = `<i class="fas fa-redo"></i> Espera ${cooldown}s`;
-                
+
                 if (cooldown <= 0) {
                     clearInterval(resendCooldown);
                     btnResendOTP.disabled = false;
@@ -1367,7 +1392,7 @@
             }
 
             // Toggle checkbox
-            checkboxContainer.addEventListener('click', function() {
+            checkboxContainer.addEventListener('click', function () {
                 checkboxAccept.checked = !checkboxAccept.checked;
                 updateCheckboxState();
             });
@@ -1375,7 +1400,7 @@
             checkboxAccept.addEventListener('change', updateCheckboxState);
 
             // Abrir modal de términos completos
-            btnReadTerms.addEventListener('click', function() {
+            btnReadTerms.addEventListener('click', function () {
                 modalTerms.classList.add('active');
                 termsContent.scrollTop = 0;
                 btnCloseTerms.disabled = true;
@@ -1383,7 +1408,7 @@
             });
 
             // Cerrar modal de términos
-            btnCloseTerms.addEventListener('click', function() {
+            btnCloseTerms.addEventListener('click', function () {
                 modalTerms.classList.remove('active');
                 hasReadTerms = true;
             });
@@ -1392,7 +1417,7 @@
             termsContent.addEventListener('scroll', updateScrollIndicator);
 
             // Enviar código OTP (continuar con el flujo normal)
-            btnSendCode.addEventListener('click', async function() {
+            btnSendCode.addEventListener('click', async function () {
                 if (!checkboxAccept.checked || !pendingLoginData) return;
 
                 btnSendCode.disabled = true;
@@ -1401,22 +1426,22 @@
                 try {
                     // Ahora sí llamamos al login completo con auth.js
                     const result = await window.TupakAuth.login(
-                        pendingLoginData.email, 
+                        pendingLoginData.email,
                         pendingLoginData.password
                     );
 
                     if (result.success && result.requiresOTP) {
                         // Cerrar modal de bienvenida
                         modalWelcome.classList.remove('active');
-                        
+
                         // Mostrar pantalla OTP
                         loginForm.style.display = 'none';
                         otpContainer.classList.add('active');
                         otpMessage.textContent = result.message || 'Ingresa el código de 6 dígitos enviado a tu WhatsApp';
-                        
+
                         // Enfocar primer input
                         otpInputs[0].focus();
-                        
+
                         // Iniciar timer
                         startOTPTimer();
                     } else {
@@ -1431,13 +1456,13 @@
             });
 
             // Cerrar modales al hacer click en el overlay
-            modalWelcome.addEventListener('click', function(e) {
+            modalWelcome.addEventListener('click', function (e) {
                 if (e.target === modalWelcome) {
                     // No permitir cerrar haciendo click fuera
                 }
             });
 
-            modalTerms.addEventListener('click', function(e) {
+            modalTerms.addEventListener('click', function (e) {
                 if (e.target === modalTerms) {
                     modalTerms.classList.remove('active');
                 }
@@ -1465,7 +1490,7 @@
             const scrollTop = termsContent.scrollTop;
             const scrollHeight = termsContent.scrollHeight;
             const clientHeight = termsContent.clientHeight;
-            
+
             // Si llegó al final (con un margen de 50px)
             if (scrollTop + clientHeight >= scrollHeight - 50) {
                 scrollIndicator.classList.add('completed');
@@ -1511,11 +1536,14 @@
             <div class="modal-body">
                 <div class="welcome-text">
                     <h3><i class="fas fa-university"></i> CAJA DE AHORRO Y CRÉDITO TUPAK RANTINA</h3>
-                    <p>Estás accediendo a un sistema de información confidencial. Antes de continuar, es importante que conozcas nuestras políticas de seguridad y uso responsable.</p>
+                    <p>Estás accediendo a un sistema de información confidencial. Antes de continuar, es importante que
+                        conozcas nuestras políticas de seguridad y uso responsable.</p>
                 </div>
 
                 <div class="warning-box">
-                    <p><strong><i class="fas fa-exclamation-triangle"></i> Importante:</strong> Este sistema contiene documentación confidencial protegida por medidas de seguridad avanzadas. El acceso está restringido únicamente a personal autorizado.</p>
+                    <p><strong><i class="fas fa-exclamation-triangle"></i> Importante:</strong> Este sistema contiene
+                        documentación confidencial protegida por medidas de seguridad avanzadas. El acceso está
+                        restringido únicamente a personal autorizado.</p>
                 </div>
 
                 <button id="btn-read-terms" class="btn-read-terms">
@@ -1528,7 +1556,10 @@
                         <span class="checkbox-mark"></span>
                     </div>
                     <label class="checkbox-label" for="checkbox-accept">
-                        He leído y acepto los <strong>Términos y Condiciones de Uso</strong> de la Biblioteca Virtual de TUPAK RANTINA. Comprendo las medidas de seguridad y me comprometo a mantener la confidencialidad de la información. <strong>Estoy dispuesto(a) a aceptar las consecuencias si incumplo, como se especifica en los Términos y Condiciones.</strong>
+                        He leído y acepto los <strong>Términos y Condiciones de Uso</strong> de la Biblioteca Virtual de
+                        TUPAK RANTINA. Comprendo las medidas de seguridad y me comprometo a mantener la confidencialidad
+                        de la información. <strong>Estoy dispuesto(a) a aceptar las consecuencias si incumplo, como se
+                            especifica en los Términos y Condiciones.</strong>
                     </label>
                 </div>
 
@@ -1548,9 +1579,10 @@
             <div class="modal-body" id="terms-content">
                 <h3>1. NATURALEZA Y PROPÓSITO DEL SISTEMA</h3>
                 <p>
-                    La Biblioteca Virtual de Documentos es un sistema de información confidencial de uso exclusivo 
-                    para personal autorizado de la Caja de Ahorro y Crédito TUPAK RANTINA. Este sistema contiene 
-                    documentación normativa, operativa y administrativa de carácter <strong>ESTRICTAMENTE CONFIDENCIAL</strong>.
+                    La Biblioteca Virtual de Documentos es un sistema de información confidencial de uso exclusivo
+                    para personal autorizado de la Caja de Ahorro y Crédito TUPAK RANTINA. Este sistema contiene
+                    documentación normativa, operativa y administrativa de carácter <strong>ESTRICTAMENTE
+                        CONFIDENCIAL</strong>.
                 </p>
 
                 <h3>2. CONFIDENCIALIDAD Y PROTECCIÓN DE LA INFORMACIÓN</h3>
@@ -1558,8 +1590,8 @@
                     <p><i class="fas fa-exclamation-triangle"></i> ADVERTENCIA IMPORTANTE:</p>
                 </div>
                 <p>
-                    Toda la información contenida en este sistema es propiedad exclusiva de la Caja de Ahorro 
-                    y Crédito TUPAK RANTINA y está protegida por las leyes de propiedad intelectual y 
+                    Toda la información contenida en este sistema es propiedad exclusiva de la Caja de Ahorro
+                    y Crédito TUPAK RANTINA y está protegida por las leyes de propiedad intelectual y
                     confidencialidad aplicables.
                 </p>
                 <p><strong>El usuario se compromete a:</strong></p>
@@ -1574,12 +1606,18 @@
                 <h3>3. MECANISMOS DE SEGURIDAD IMPLEMENTADOS</h3>
                 <p>El sistema cuenta con múltiples capas de seguridad para proteger la información:</p>
                 <ul>
-                    <li><strong><i class="fas fa-lock"></i> Autenticación de Doble Factor (2FA):</strong> Verificación mediante código OTP enviado a WhatsApp registrado</li>
-                    <li><strong><i class="fas fa-shield-alt"></i> Protección Anti-Copia:</strong> Deshabilitación de copiar, imprimir y captura de pantalla</li>
-                    <li><strong><i class="fas fa-clock"></i> Sesiones Temporales:</strong> Cierre automático de sesión por inactividad (60 minutos)</li>
-                    <li><strong><i class="fas fa-clipboard-list"></i> Registro de Auditoría:</strong> Todas las acciones quedan registradas con fecha, hora y usuario</li>
-                    <li><strong><i class="fas fa-key"></i> Control de Acceso:</strong> Permisos individuales según rol y función</li>
-                    <li><strong><i class="fab fa-whatsapp"></i> Validación por WhatsApp:</strong> Solo números de WhatsApp autorizados pueden recibir códigos OTP</li>
+                    <li><strong><i class="fas fa-lock"></i> Autenticación de Doble Factor (2FA):</strong> Verificación
+                        mediante código OTP enviado a WhatsApp registrado</li>
+                    <li><strong><i class="fas fa-shield-alt"></i> Protección Anti-Copia:</strong> Deshabilitación de
+                        copiar, imprimir y captura de pantalla</li>
+                    <li><strong><i class="fas fa-clock"></i> Sesiones Temporales:</strong> Cierre automático de sesión
+                        por inactividad (60 minutos)</li>
+                    <li><strong><i class="fas fa-clipboard-list"></i> Registro de Auditoría:</strong> Todas las acciones
+                        quedan registradas con fecha, hora y usuario</li>
+                    <li><strong><i class="fas fa-key"></i> Control de Acceso:</strong> Permisos individuales según rol y
+                        función</li>
+                    <li><strong><i class="fab fa-whatsapp"></i> Validación por WhatsApp:</strong> Solo números de
+                        WhatsApp autorizados pueden recibir códigos OTP</li>
                 </ul>
 
                 <h3>4. PROHIBICIONES EXPRESAS</h3>
@@ -1589,12 +1627,17 @@
                 <ul>
                     <li><i class="fas fa-times-circle"></i> Capturar pantallas (screenshots) de los documentos</li>
                     <li><i class="fas fa-times-circle"></i> Copiar o extraer texto de los documentos</li>
-                    <li><i class="fas fa-times-circle"></i> Imprimir documentos sin autorización expresa de gerencia</li>
-                    <li><i class="fas fa-times-circle"></i> Fotografiar la pantalla con dispositivos móviles u otros medios</li>
+                    <li><i class="fas fa-times-circle"></i> Imprimir documentos sin autorización expresa de gerencia
+                    </li>
+                    <li><i class="fas fa-times-circle"></i> Fotografiar la pantalla con dispositivos móviles u otros
+                        medios</li>
                     <li><i class="fas fa-times-circle"></i> Compartir credenciales de acceso con otras personas</li>
-                    <li><i class="fas fa-times-circle"></i> Acceder al sistema desde equipos públicos o no autorizados</li>
-                    <li><i class="fas fa-times-circle"></i> Intentar eludir o desactivar los mecanismos de seguridad</li>
-                    <li><i class="fas fa-times-circle"></i> Descargar o exportar documentos por cualquier medio no autorizado</li>
+                    <li><i class="fas fa-times-circle"></i> Acceder al sistema desde equipos públicos o no autorizados
+                    </li>
+                    <li><i class="fas fa-times-circle"></i> Intentar eludir o desactivar los mecanismos de seguridad
+                    </li>
+                    <li><i class="fas fa-times-circle"></i> Descargar o exportar documentos por cualquier medio no
+                        autorizado</li>
                     <li><i class="fas fa-times-circle"></i> Utilizar herramientas de grabación de pantalla o video</li>
                     <li><i class="fas fa-times-circle"></i> Dejar el sistema abierto en equipos desatendidos</li>
                 </ul>
@@ -1613,7 +1656,8 @@
 
                 <h3>6. REGISTRO Y AUDITORÍA</h3>
                 <p>
-                    <strong>IMPORTANTE:</strong> Todas las actividades en el sistema son registradas y auditadas, incluyendo:
+                    <strong>IMPORTANTE:</strong> Todas las actividades en el sistema son registradas y auditadas,
+                    incluyendo:
                 </p>
                 <ul>
                     <li>Fecha y hora de cada inicio de sesión</li>
@@ -1623,7 +1667,7 @@
                     <li>Cualquier anomalía o comportamiento sospechoso</li>
                 </ul>
                 <p>
-                    Estos registros pueden ser utilizados para fines de auditoría interna, investigaciones de seguridad 
+                    Estos registros pueden ser utilizados para fines de auditoría interna, investigaciones de seguridad
                     y como evidencia en procedimientos disciplinarios o legales.
                 </p>
 
@@ -1636,15 +1680,16 @@
                     <li><strong>Suspensión inmediata</strong> del acceso al sistema</li>
                     <li><strong>Medidas disciplinarias</strong> según el reglamento interno de trabajo</li>
                     <li><strong>Acciones legales civiles</strong> por daños y perjuicios</li>
-                    <li><strong>Acciones legales penales</strong> por violación de secreto profesional o empresarial</li>
+                    <li><strong>Acciones legales penales</strong> por violación de secreto profesional o empresarial
+                    </li>
                     <li><strong>Responsabilidad económica</strong> por daños causados a la institución</li>
                     <li><strong>Terminación del contrato laboral</strong> con causa justa</li>
                 </ul>
 
                 <h3>8. PROTECCIÓN DE DATOS PERSONALES</h3>
                 <p>
-                    La Caja de Ahorro y Crédito TUPAK RANTINA se compromete a proteger los datos personales de sus 
-                    usuarios conforme a la legislación vigente. Los datos recopilados (correo electrónico, número de 
+                    La Caja de Ahorro y Crédito TUPAK RANTINA se compromete a proteger los datos personales de sus
+                    usuarios conforme a la legislación vigente. Los datos recopilados (correo electrónico, número de
                     WhatsApp, registros de actividad) serán utilizados exclusivamente para:
                 </p>
                 <ul>
@@ -1663,20 +1708,23 @@
                     <li><i class="fas fa-check"></i> Comprende todas las disposiciones y restricciones establecidas</li>
                     <li><i class="fas fa-check"></i> Acepta cumplir con todas las obligaciones y prohibiciones</li>
                     <li><i class="fas fa-check"></i> Reconoce las consecuencias del incumplimiento</li>
-                    <li><i class="fas fa-check"></i> Se compromete a mantener la confidencialidad de toda información accedida</li>
+                    <li><i class="fas fa-check"></i> Se compromete a mantener la confidencialidad de toda información
+                        accedida</li>
                 </ul>
 
-                <div style="border: 2px solid #2c5282; padding: 15px; background-color: #ebf8ff; margin-top: 30px; border-radius: 8px;">
+                <div
+                    style="border: 2px solid #2c5282; padding: 15px; background-color: #ebf8ff; margin-top: 30px; border-radius: 8px;">
                     <h3 style="margin-top: 0; color: #2c5282; text-align: center;">
                         <i class="fas fa-phone-alt"></i> CONTACTO Y SOPORTE
                     </h3>
                     <p style="text-align: center;">
-                        Para consultas sobre estos términos, problemas de acceso o reportar incidentes de seguridad, 
+                        Para consultas sobre estos términos, problemas de acceso o reportar incidentes de seguridad,
                         contacte al Departamento de Sistemas de TUPAK RANTINA.
                     </p>
                 </div>
 
-                <div style="text-align: center; margin-top: 30px; padding: 20px; background-color: #f7fafc; border-radius: 5px;">
+                <div
+                    style="text-align: center; margin-top: 30px; padding: 20px; background-color: #f7fafc; border-radius: 5px;">
                     <p style="font-size: 0.9em; color: #718096;">
                         <strong>Última actualización:</strong> Octubre 2025<br>
                         © 2025 Caja de Ahorro y Crédito TUPAK RANTINA - Todos los derechos reservados
@@ -1694,4 +1742,5 @@
         </div>
     </div>
 </body>
+
 </html>
