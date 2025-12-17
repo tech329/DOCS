@@ -1,896 +1,917 @@
 <!doctype html>
 <html lang="es">
+
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
-<title>Manual de Crédito TUPAK RANTINA - Documento Protegido</title>
-<meta name="description" content="Manual de Crédito interno - Caja de Ahorro y Crédito TUPAK RANTINA">
-<meta name="robots" content="noindex, nofollow">
-<meta name="author" content="Caja TUPAK RANTINA">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+  <title>Manual de Crédito TUPAK RANTINA - Documento Protegido</title>
+  <meta name="description" content="Manual de Crédito interno - Caja de Ahorro y Crédito TUPAK RANTINA">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="author" content="Caja TUPAK RANTINA">
 
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<style>
-  :root{
-    --primary: #001749;
-    --secondary: #e48410;
-    --accent: #3787c6;
-    --blue: #015cd0;
-    --bg-light: #f5f7fa;
-    --text-dark: #2c3e50;
-    --text-gray: #6c757d;
-    --white: #ffffff;
-  }
-
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-
-  html, body {
-    height: 100%;
-    margin: 0;
-    background: var(--bg-light);
-    font-family: 'Segoe UI', system-ui, Roboto, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    overflow: hidden;
-  }
-
-  @media print {
-    body { display: none !important; }
-    * { content: "DOCUMENTO PROTEGIDO - IMPRESIÓN NO AUTORIZADA" !important; color: red !important; }
-  }
-
-  /* HEADER FIJO */
-  .top-header {
-    background: var(--primary);
-    color: white;
-    padding: 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  }
-
-  .header-content {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 20px 30px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .header-left {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .btn-back {
-    background: rgba(255,255,255,0.15);
-    color: white;
-    border: 2px solid rgba(255,255,255,0.3);
-    padding: 10px 20px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    font-size: 0.95em;
-  }
-
-  .btn-back:hover {
-    background: rgba(255,255,255,0.25);
-    border-color: rgba(255,255,255,0.6);
-  }
-
-  .header-title {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .header-title h1 {
-    font-size: 1.5em;
-    font-weight: 700;
-    margin: 0;
-  }
-
-  .header-info {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    font-size: 0.9em;
-    opacity: 0.9;
-  }
-
-  .info-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  /* CONTENEDOR PRINCIPAL */
-  .main-container {
-    position: fixed;
-    top: 80px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 30px;
-    display: flex;
-    gap: 30px;
-    overflow: hidden;
-  }
-
-  /* NAVEGACIÓN LATERAL */
-  .sidebar {
-    width: 280px;
-    background: white;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-
-  .sidebar-title {
-    font-size: 1.1em;
-    font-weight: 700;
-    color: var(--primary);
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--bg-light);
-    flex-shrink: 0;
-  }
-
-  .nav-list {
-    list-style: none;
-    overflow-y: auto;
-    overflow-x: hidden;
-    flex: 1;
-    padding-right: 5px;
-  }
-
-  .nav-list::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  .nav-list::-webkit-scrollbar-track {
-    background: var(--bg-light);
-    border-radius: 3px;
-  }
-
-  .nav-list::-webkit-scrollbar-thumb {
-    background: var(--accent);
-    border-radius: 3px;
-  }
-
-  .nav-list::-webkit-scrollbar-thumb:hover {
-    background: var(--blue);
-  }
-
-  .nav-item {
-    margin-bottom: 8px;
-  }
-
-  .nav-link {
-    display: block;
-    padding: 10px 12px;
-    color: var(--text-dark);
-    text-decoration: none;
-    border-radius: 6px;
-    transition: all 0.2s ease;
-    font-size: 0.95em;
-    cursor: pointer;
-  }
-
-  .nav-link:hover {
-    background: var(--bg-light);
-    color: var(--blue);
-  }
-
-  .nav-link.active {
-    background: var(--primary);
-    color: white;
-    font-weight: 600;
-  }
-
-  /* CONTENIDO DEL DOCUMENTO */
-  .document-content {
-    flex: 1;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding: 0;
-  }
-
-  .document-content::-webkit-scrollbar {
-    width: 10px;
-  }
-
-  .document-content::-webkit-scrollbar-track {
-    background: var(--bg-light);
-  }
-
-  .document-content::-webkit-scrollbar-thumb {
-    background: var(--primary);
-    border-radius: 5px;
-  }
-
-  .document-content::-webkit-scrollbar-thumb:hover {
-    background: var(--blue);
-  }
-
-  #documentPages {
-    padding: 50px;
-  }
-
-  .page-section {
-    display: none;
-    animation: fadeIn 0.3s ease;
-  }
-
-  .page-section.active {
-    display: block;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ESTILOS DEL CONTENIDO MARKDOWN */
-  .content h1 {
-    color: var(--primary);
-    font-size: 2.2em;
-    font-weight: 700;
-    margin: 0 0 0.5em 0;
-    padding-bottom: 0.3em;
-    border-bottom: 3px solid var(--secondary);
-  }
-
-  .content h2 {
-    color: var(--primary);
-    font-size: 1.8em;
-    font-weight: 600;
-    margin: 1.5em 0 0.8em 0;
-  }
-
-  .content h3 {
-    color: var(--blue);
-    font-size: 1.4em;
-    font-weight: 600;
-    margin: 1.2em 0 0.6em 0;
-  }
-
-  .content h4 {
-    color: var(--accent);
-    font-size: 1.1em;
-    font-weight: 600;
-    margin: 1em 0 0.5em 0;
-  }
-
-  .content p {
-    margin: 0 0 1em 0;
-    line-height: 1.7;
-    color: var(--text-dark);
-    font-size: 1em;
-  }
-
-  .content ul, .content ol {
-    margin: 0 0 1em 0;
-    padding-left: 2em;
-    line-height: 1.7;
-    color: var(--text-dark);
-  }
-
-  .content li {
-    margin-bottom: 0.5em;
-  }
-
-  .content strong {
-    color: var(--primary);
-    font-weight: 600;
-  }
-
-  .content em {
-    color: var(--accent);
-    font-style: italic;
-  }
-
-  .content blockquote {
-    border-left: 4px solid var(--secondary);
-    padding: 1em 1.5em;
-    margin: 1em 0;
-    background: #fff8f0;
-    border-radius: 4px;
-    font-style: italic;
-    color: var(--text-gray);
-  }
-
-  .content code {
-    background: var(--bg-light);
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-family: 'Courier New', monospace;
-    font-size: 0.9em;
-    color: var(--primary);
-  }
-
-  .content pre {
-    background: var(--bg-light);
-    padding: 1em;
-    border-radius: 6px;
-    overflow-x: auto;
-    margin: 1em 0;
-  }
-
-  .content table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1em 0;
-  }
-
-  .content table th {
-    background: var(--primary);
-    color: white;
-    padding: 12px;
-    text-align: left;
-    font-weight: 600;
-  }
-
-  .content table td {
-    padding: 12px;
-    border-bottom: 1px solid #e0e0e0;
-  }
-
-  .content table tr:hover {
-    background: var(--bg-light);
-  }
-
-  /* MARCA DE AGUA TIPO PATRÓN */
-  .watermark {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 1;
-  }
-
-  .watermark .tile {
-    position: absolute;
-    inset: -20%;
-    opacity: 0.18;
-    transform: rotate(-18deg);
-    background-size: 400px 200px;
-    background-repeat: repeat;
-    filter: saturate(0.6);
-    transition: background-position 1s ease-out;
-  }
-
-  .watermark .label {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    font-weight: 700;
-    color: var(--primary);
-    background: rgba(255, 255, 255, 0.85);
-    padding: 10px 16px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    font-size: 12px;
-    z-index: 999;
-    backdrop-filter: blur(4px);
-  }
-
-  .watermark .label .separator {
-    margin: 0 6px;
-    color: var(--secondary);
-  }
-
-  .security-info {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: var(--primary);
-    color: white;
-    padding: 10px 15px;
-    border-radius: 6px;
-    font-size: 0.85em;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    z-index: 999;
-  }
-
-  .loader {
-    position: fixed;
-    inset: 0;
-    background: var(--bg-light);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    transition: opacity 0.3s ease;
-  }
-
-  .loader.hidden {
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .spinner {
-    width: 50px;
-    height: 50px;
-    border: 4px solid rgba(0, 23, 73, 0.1);
-    border-top-color: var(--primary);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-  }
-
-  @keyframes spin {
-    to { transform: rotate(360deg); }
-  }
-
-  .loader-text {
-    margin-top: 20px;
-    color: var(--primary);
-    font-weight: 600;
-    font-size: 1.1em;
-  }
-
-  /* RESPONSIVE MÓVIL */
-  @media (max-width: 968px) {
-    html, body {
-      overflow: auto;
+  <style>
+    :root {
+      --primary: #001749;
+      --secondary: #e48410;
+      --accent: #3787c6;
+      --blue: #015cd0;
+      --bg-light: #f5f7fa;
+      --text-dark: #2c3e50;
+      --text-gray: #6c757d;
+      --white: #ffffff;
     }
 
-    /* Header más pequeño en móvil */
-    .top-header {
+    * {
+      margin: 0;
       padding: 0;
+      box-sizing: border-box;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      background: var(--bg-light);
+      font-family: 'Segoe UI', system-ui, Roboto, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow: hidden;
+    }
+
+    @media print {
+      body {
+        display: none !important;
+      }
+
+      * {
+        content: "DOCUMENTO PROTEGIDO - IMPRESIÓN NO AUTORIZADA" !important;
+        color: red !important;
+      }
+    }
+
+    /* HEADER FIJO */
+    .top-header {
+      background: var(--primary);
+      color: white;
+      padding: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
 
     .header-content {
-      padding: 12px 15px;
-      flex-direction: column;
-      gap: 8px;
-      align-items: flex-start;
-    }
-
-    .header-left {
-      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px 30px;
+      display: flex;
+      align-items: center;
       justify-content: space-between;
     }
 
-    .header-title {
-      flex: 1;
-    }
-
-    .header-title h1 {
-      font-size: 1em;
-    }
-
-    .header-info {
-      display: none;
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
     }
 
     .btn-back {
-      padding: 8px 12px;
-      font-size: 0.85em;
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 0.95em;
     }
 
-    /* Contenedor principal ajustado */
+    .btn-back:hover {
+      background: rgba(255, 255, 255, 0.25);
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+
+    .header-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-title h1 {
+      font-size: 1.5em;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .header-info {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 0.9em;
+      opacity: 0.9;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* CONTENEDOR PRINCIPAL */
     .main-container {
-      position: relative;
-      top: auto;
-      flex-direction: column;
-      padding: 15px;
-      overflow: visible;
-      min-height: calc(100vh - 70px);
-      margin-top: 70px;
+      position: fixed;
+      top: 80px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 30px;
+      display: flex;
+      gap: 30px;
+      overflow: hidden;
     }
 
-    /* Ocultar sidebar en móvil */
+    /* NAVEGACIÓN LATERAL */
     .sidebar {
-      display: none;
+      width: 280px;
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
     }
 
-    /* Documento ocupa todo el ancho */
+    .sidebar-title {
+      font-size: 1.1em;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--bg-light);
+      flex-shrink: 0;
+    }
+
+    .nav-list {
+      list-style: none;
+      overflow-y: auto;
+      overflow-x: hidden;
+      flex: 1;
+      padding-right: 5px;
+    }
+
+    .nav-list::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .nav-list::-webkit-scrollbar-track {
+      background: var(--bg-light);
+      border-radius: 3px;
+    }
+
+    .nav-list::-webkit-scrollbar-thumb {
+      background: var(--accent);
+      border-radius: 3px;
+    }
+
+    .nav-list::-webkit-scrollbar-thumb:hover {
+      background: var(--blue);
+    }
+
+    .nav-item {
+      margin-bottom: 8px;
+    }
+
+    .nav-link {
+      display: block;
+      padding: 10px 12px;
+      color: var(--text-dark);
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      font-size: 0.95em;
+      cursor: pointer;
+    }
+
+    .nav-link:hover {
+      background: var(--bg-light);
+      color: var(--blue);
+    }
+
+    .nav-link.active {
+      background: var(--primary);
+      color: white;
+      font-weight: 600;
+    }
+
+    /* CONTENIDO DEL DOCUMENTO */
     .document-content {
-      overflow: visible;
-      border-radius: 0;
-      box-shadow: none;
-      background: transparent;
-    }
-
-    /* Páginas estilo hojas separadas - TODAS VISIBLES */
-    #documentPages {
+      flex: 1;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      overflow-y: auto;
+      overflow-x: hidden;
       padding: 0;
     }
 
+    .document-content::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .document-content::-webkit-scrollbar-track {
+      background: var(--bg-light);
+    }
+
+    .document-content::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 5px;
+    }
+
+    .document-content::-webkit-scrollbar-thumb:hover {
+      background: var(--blue);
+    }
+
+    #documentPages {
+      padding: 50px;
+    }
+
     .page-section {
-      display: block !important;
-      min-height: auto;
-      padding: 30px 20px;
-      margin-bottom: 20px;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      page-break-after: always;
+      display: none;
+      animation: fadeIn 0.3s ease;
     }
 
-    .page-section:not(:last-child)::after {
-      content: '';
+    .page-section.active {
       display: block;
-      height: 20px;
-      background: linear-gradient(to bottom, transparent, var(--bg-light));
-      margin: 30px -20px -30px -20px;
     }
 
-    /* Marca de agua más pequeña en móvil */
-    .watermark .label {
-      font-size: 9px;
-      padding: 6px 10px;
-      bottom: 8px;
-      right: 8px;
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
-  }
-</style>
+
+    /* ESTILOS DEL CONTENIDO MARKDOWN */
+    .content h1 {
+      color: var(--primary);
+      font-size: 2.2em;
+      font-weight: 700;
+      margin: 0 0 0.5em 0;
+      padding-bottom: 0.3em;
+      border-bottom: 3px solid var(--secondary);
+    }
+
+    .content h2 {
+      color: var(--primary);
+      font-size: 1.8em;
+      font-weight: 600;
+      margin: 1.5em 0 0.8em 0;
+    }
+
+    .content h3 {
+      color: var(--blue);
+      font-size: 1.4em;
+      font-weight: 600;
+      margin: 1.2em 0 0.6em 0;
+    }
+
+    .content h4 {
+      color: var(--accent);
+      font-size: 1.1em;
+      font-weight: 600;
+      margin: 1em 0 0.5em 0;
+    }
+
+    .content p {
+      margin: 0 0 1em 0;
+      line-height: 1.7;
+      color: var(--text-dark);
+      font-size: 1em;
+    }
+
+    .content ul,
+    .content ol {
+      margin: 0 0 1em 0;
+      padding-left: 2em;
+      line-height: 1.7;
+      color: var(--text-dark);
+    }
+
+    .content li {
+      margin-bottom: 0.5em;
+    }
+
+    .content strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .content em {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .content blockquote {
+      border-left: 4px solid var(--secondary);
+      padding: 1em 1.5em;
+      margin: 1em 0;
+      background: #fff8f0;
+      border-radius: 4px;
+      font-style: italic;
+      color: var(--text-gray);
+    }
+
+    .content code {
+      background: var(--bg-light);
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+      color: var(--primary);
+    }
+
+    .content pre {
+      background: var(--bg-light);
+      padding: 1em;
+      border-radius: 6px;
+      overflow-x: auto;
+      margin: 1em 0;
+    }
+
+    .content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1em 0;
+    }
+
+    .content table th {
+      background: var(--primary);
+      color: white;
+      padding: 12px;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .content table td {
+      padding: 12px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .content table tr:hover {
+      background: var(--bg-light);
+    }
+
+    /* MARCA DE AGUA TIPO PATRÓN */
+    .watermark {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .watermark .tile {
+      position: absolute;
+      inset: -20%;
+      opacity: 0.18;
+      transform: rotate(-18deg);
+      background-size: 400px 200px;
+      background-repeat: repeat;
+      filter: saturate(0.6);
+      transition: background-position 1s ease-out;
+    }
+
+    .watermark .label {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      background: rgba(255, 255, 255, 0.85);
+      padding: 10px 16px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      font-size: 12px;
+      z-index: 999;
+      backdrop-filter: blur(4px);
+    }
+
+    .watermark .label .separator {
+      margin: 0 6px;
+      color: var(--secondary);
+    }
+
+    .security-info {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--primary);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 6px;
+      font-size: 0.85em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 999;
+    }
+
+    .loader {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-light);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.3s ease;
+    }
+
+    .loader.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(0, 23, 73, 0.1);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loader-text {
+      margin-top: 20px;
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 1.1em;
+    }
+
+    /* RESPONSIVE MÓVIL */
+    @media (max-width: 968px) {
+
+      html,
+      body {
+        overflow: auto;
+      }
+
+      /* Header más pequeño en móvil */
+      .top-header {
+        padding: 0;
+      }
+
+      .header-content {
+        padding: 12px 15px;
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+      }
+
+      .header-left {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .header-title {
+        flex: 1;
+      }
+
+      .header-title h1 {
+        font-size: 1em;
+      }
+
+      .header-info {
+        display: none;
+      }
+
+      .btn-back {
+        padding: 8px 12px;
+        font-size: 0.85em;
+      }
+
+      /* Contenedor principal ajustado */
+      .main-container {
+        position: relative;
+        top: auto;
+        flex-direction: column;
+        padding: 15px;
+        overflow: visible;
+        min-height: calc(100vh - 70px);
+        margin-top: 70px;
+      }
+
+      /* Ocultar sidebar en móvil */
+      .sidebar {
+        display: none;
+      }
+
+      /* Documento ocupa todo el ancho */
+      .document-content {
+        overflow: visible;
+        border-radius: 0;
+        box-shadow: none;
+        background: transparent;
+      }
+
+      /* Páginas estilo hojas separadas - TODAS VISIBLES */
+      #documentPages {
+        padding: 0;
+      }
+
+      .page-section {
+        display: block !important;
+        min-height: auto;
+        padding: 30px 20px;
+        margin-bottom: 20px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        page-break-after: always;
+      }
+
+      .page-section:not(:last-child)::after {
+        content: '';
+        display: block;
+        height: 20px;
+        background: linear-gradient(to bottom, transparent, var(--bg-light));
+        margin: 30px -20px -30px -20px;
+      }
+
+      /* Marca de agua más pequeña en móvil */
+      .watermark .label {
+        font-size: 9px;
+        padding: 6px 10px;
+        bottom: 8px;
+        right: 8px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- LOADER -->
-<div class="loader" id="loader">
-  <div class="spinner"></div>
-  <div class="loader-text" id="loaderText">Cargando documento...</div>
-</div>
+  <!-- LOADER DE VERIFICACIÓN DE AUTENTICACIÓN -->
+  <div class="loader" id="loader">
+    <div class="spinner"></div>
+    <div class="loader-text" id="loaderText">Verificando acceso...</div>
+  </div>
 
-<!-- HEADER FIJO -->
-<header class="top-header">
-  <div class="header-content">
-    <div class="header-left">
-      <a href="index.html" class="btn-back">
-        <i class="fas fa-arrow-left"></i> Volver
-      </a>
-      <div class="header-title">
-        <i class="fas fa-book" style="font-size: 1.5em; color: var(--secondary);"></i>
-        <h1 id="documentTitle">Cargando...</h1>
+  <!-- HEADER FIJO -->
+  <header class="top-header">
+    <div class="header-content">
+      <div class="header-left">
+        <a href="index.html" class="btn-back">
+          <i class="fas fa-arrow-left"></i> Volver
+        </a>
+        <div class="header-title">
+          <i class="fas fa-book" style="font-size: 1.5em; color: var(--secondary);"></i>
+          <h1 id="documentTitle">Cargando...</h1>
+        </div>
+      </div>
+      <div class="header-info">
+        <div class="info-item">
+          <i class="fas fa-user"></i>
+          <span id="userInfo">Usuario</span>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-clock"></i>
+          <span id="clockInfo">--:--:--</span>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-shield-alt"></i>
+          <span>Protegido</span>
+        </div>
       </div>
     </div>
-    <div class="header-info">
-      <div class="info-item">
-        <i class="fas fa-user"></i>
-        <span id="userInfo">Usuario</span>
-      </div>
-      <div class="info-item">
-        <i class="fas fa-clock"></i>
-        <span id="clockInfo">--:--:--</span>
-      </div>
-      <div class="info-item">
-        <i class="fas fa-shield-alt"></i>
-        <span>Protegido</span>
-      </div>
+  </header>
+
+  <!-- MARCA DE AGUA DINÁMICA -->
+  <div class="watermark" aria-hidden="true">
+    <div class="tile" id="wmTile"></div>
+    <div class="label">
+      <span id="wmUser">Usuario</span>
+      <span class="separator">•</span>
+      <span id="wmClock">--:--:--</span>
+      <span class="separator">•</span>
+      <span id="wmDoc">Documento</span>
+      <span class="separator">•</span>
+      Sesión <span id="wmSess">---</span>
     </div>
   </div>
-</header>
 
-<!-- MARCA DE AGUA DINÁMICA -->
-<div class="watermark" aria-hidden="true">
-  <div class="tile" id="wmTile"></div>
-  <div class="label">
-    <span id="wmUser">Usuario</span>
-    <span class="separator">•</span>
-    <span id="wmClock">--:--:--</span>
-    <span class="separator">•</span>
-    <span id="wmDoc">Documento</span>
-    <span class="separator">•</span>
-    Sesión <span id="wmSess">---</span>
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="main-container">
+    <!-- NAVEGACIÓN LATERAL -->
+    <aside class="sidebar">
+      <div class="sidebar-title">
+        <i class="fas fa-list"></i> Contenido
+      </div>
+      <ul class="nav-list" id="navList">
+        <!-- Se llenará dinámicamente -->
+      </ul>
+    </aside>
+
+    <!-- CONTENIDO DEL DOCUMENTO -->
+    <main class="document-content">
+      <div id="documentPages">
+        <!-- Se llenará dinámicamente -->
+      </div>
+    </main>
   </div>
-</div>
 
-<!-- CONTENIDO PRINCIPAL -->
-<div class="main-container">
-  <!-- NAVEGACIÓN LATERAL -->
-  <aside class="sidebar">
-    <div class="sidebar-title">
-      <i class="fas fa-list"></i> Contenido
-    </div>
-    <ul class="nav-list" id="navList">
-      <!-- Se llenará dinámicamente -->
-    </ul>
-  </aside>
+  <script>
+    // ==========================================
+    // CONFIGURACIÓN Y CONSTANTES
+    // ==========================================
+    const SESSION_ID = Math.random().toString(36).substr(2, 9).toUpperCase();
+    const USER_EMAIL = 'usuario@tupakrantina.com';
 
-  <!-- CONTENIDO DEL DOCUMENTO -->
-  <main class="document-content">
-    <div id="documentPages">
-      <!-- Se llenará dinámicamente -->
-    </div>
-  </main>
-</div>
+    // ==========================================
+    // CATÁLOGO DE DOCUMENTOS (SEGURO)
+    // ==========================================
+    // Mapeo de códigos a documentos (no visible en URL)
+    const DOCUMENT_CATALOG = {
+      '001': {
+        file: 'Manual_de_Credito_TUPAK_RANTINA.md',
+        title: 'Manual de Crédito',
+        category: 'Finanzas'
+      },
+      '002': {
+        file: 'Manual_de_Ahorro_Programado_TUPAK_RANTINA.md',
+        title: 'Manual de Ahorro Programado',
+        category: 'Captaciones'
+      },
+      '003': {
+        file: 'Estatutos_TUPAK_RANTINA.md',
+        title: 'Estatuto Social',
+        category: 'Normativa'
+      },
+      '004': {
+        file: 'Reglamento_Interno_TUPAK_RANTINA.md',
+        title: 'Reglamento Interno',
+        category: 'Normativa'
+      },
+      '005': {
+        file: 'Manual_de_Caja_y_Boveda_TUPAK_RANTINA.md',
+        title: 'Manual de Caja y Bóveda',
+        category: 'Operaciones'
+      },
+      '006': {
+        file: 'Manual_de_Funciones_TUPAK_RANTINA.md',
+        title: 'Manual de Funciones',
+        category: 'Recursos Humanos'
+      },
+    };
 
-<script>
-// ==========================================
-// CONFIGURACIÓN Y CONSTANTES
-// ==========================================
-const SESSION_ID = Math.random().toString(36).substr(2, 9).toUpperCase();
-const USER_EMAIL = 'usuario@tupakrantina.com';
+    // Obtener documento desde código ID en URL
+    function getDocumentInfo() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const docId = urlParams.get('id');
 
-// ==========================================
-// CATÁLOGO DE DOCUMENTOS (SEGURO)
-// ==========================================
-// Mapeo de códigos a documentos (no visible en URL)
-const DOCUMENT_CATALOG = {
-  '001': {
-    file: 'Manual_de_Credito_TUPAK_RANTINA.md',
-    title: 'Manual de Crédito',
-    category: 'Finanzas'
-  },
-  '002': {
-    file: 'Manual_de_Ahorro_Programado_TUPAK_RANTINA.md',
-    title: 'Manual de Ahorro Programado',
-    category: 'Captaciones'
-  },
-  '003': {
-    file: 'Estatutos_TUPAK_RANTINA.md',
-    title: 'Estatuto Social',
-    category: 'Normativa'
-  },
-  '004': {
-    file: 'Reglamento_Interno_TUPAK_RANTINA.md',
-    title: 'Reglamento Interno',
-    category: 'Normativa'
-  },
-  '005': {
-    file: 'Manual_de_Caja_y_Boveda_TUPAK_RANTINA.md',
-    title: 'Manual de Caja y Bóveda',
-    category: 'Operaciones'
-  },
-  '006': {
-    file: 'Manual_de_Funciones_TUPAK_RANTINA.md',
-    title: 'Manual de Funciones',
-    category: 'Recursos Humanos'
-  },
-};
-
-// Obtener documento desde código ID en URL
-function getDocumentInfo() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const docId = urlParams.get('id');
-  
-  // Si no hay ID o no existe en el catálogo, usar el primero por defecto
-  if (!docId || !DOCUMENT_CATALOG[docId]) {
-    const firstKey = Object.keys(DOCUMENT_CATALOG)[0];
-    return DOCUMENT_CATALOG[firstKey];
-  }
-  
-  return DOCUMENT_CATALOG[docId];
-}
-
-const DOCUMENT_INFO = getDocumentInfo();
-const MARKDOWN_URL = DOCUMENT_INFO.file;
-const DOCUMENT_TITLE = DOCUMENT_INFO.title;
-
-// Actualizar el texto del loader con el nombre del documento
-const loaderText = document.getElementById('loaderText');
-if (loaderText) {
-  loaderText.textContent = `Cargando ${DOCUMENT_TITLE}...`;
-}
-
-// ==========================================
-// SISTEMA DE SEGURIDAD ANTICOPIA
-// ==========================================
-// PROTECCIONES DE SEGURIDAD
-// ==========================================
-function logSecurityEvent(description) {
-  if (window.TupakAuth && window.TupakAuth.logUserAction) {
-  window.TupakAuth.logUserAction(description);
-  }
-}
-
-function initSecurityProtections() {
-    document.addEventListener('contextmenu', e => { 
-        e.preventDefault(); 
-        logSecurityEvent('Intento: Clic derecho (bloqueado)');
-        return false; 
-    });
-
-    document.addEventListener('selectstart', e => { e.preventDefault(); return false; });
-
-    document.addEventListener('copy', e => { 
-        e.preventDefault(); 
-        logSecurityEvent('Intento: Copiar texto (bloqueado)');
-        return false; 
-    });
-
-    document.addEventListener('cut', e => { 
-        e.preventDefault(); 
-        logSecurityEvent('Intento: Cortar texto (bloqueado)');
-        return false; 
-    });
-
-    document.addEventListener('dragstart', e => { e.preventDefault(); return false; });
-
-    document.addEventListener('keydown', function(e) {
-      // Detectar PrintScreen
-      if (e.key === 'PrintScreen' || e.keyCode === 44) {
-        logSecurityEvent('Intento: Captura de pantalla con PrintScreen');
-        // No podemos bloquearlo realmente, pero sí registrarlo
+      // Si no hay ID o no existe en el catálogo, usar el primero por defecto
+      if (!docId || !DOCUMENT_CATALOG[docId]) {
+        const firstKey = Object.keys(DOCUMENT_CATALOG)[0];
+        return DOCUMENT_CATALOG[firstKey];
       }
-      
-      // Bloquear F12
-      if (e.key === 'F12' || e.keyCode === 123) {
-        e.preventDefault();
-        e.stopPropagation();
-        logSecurityEvent('Intento: Abrir DevTools con F12 (bloqueado)');
-        return false;
-      }
-      
-      // Bloquear TODAS las combinaciones con Ctrl
-      if (e.ctrlKey) {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        if (e.key === 'p' || e.key === 'P') {
-          logSecurityEvent('Intento: Imprimir con Ctrl+P (bloqueado)');
-        } else if (e.key === 'u' || e.key === 'U') {
-          logSecurityEvent('Intento: Ver código fuente con Ctrl+U (bloqueado)');
-        } else if (e.key === 's' || e.key === 'S') {
-          logSecurityEvent('Intento: Guardar documento con Ctrl+S (bloqueado)');
-        } else if (e.shiftKey && (e.key === 'i' || e.key === 'I')) {
-          logSecurityEvent('Intento: Abrir DevTools con Ctrl+Shift+I (bloqueado)');
-        } else if (e.shiftKey && (e.key === 'j' || e.key === 'J')) {
-          logSecurityEvent('Intento: Abrir consola con Ctrl+Shift+J (bloqueado)');
-        } else if (e.shiftKey && (e.key === 'c' || e.key === 'C')) {
-          logSecurityEvent('Intento: Inspeccionar elemento con Ctrl+Shift+C (bloqueado)');
-        } else {
-          logSecurityEvent(`Intento: Combinación Ctrl+${e.key} (bloqueado)`);
-        }
-        return false;
-      }
-      
-      // Bloquear Command (Mac)
-      if (e.metaKey) {
-        e.preventDefault();
-        e.stopPropagation();
-        logSecurityEvent(`Intento: Combinación Cmd+${e.key} (bloqueado)`);
-        return false;
-      }
-      
-      // Bloquear F1-F12
-      if (e.keyCode >= 112 && e.keyCode <= 123) {
-        e.preventDefault();
-        e.stopPropagation();
-        logSecurityEvent(`Intento: Tecla F${e.keyCode - 111} (bloqueado)`);
-        return false;
-      }
-    });
 
-    // Bloquear impresión
-    window.addEventListener('beforeprint', e => { 
-      e.preventDefault(); 
-      e.stopPropagation();
-      logSecurityEvent('Intento: Imprimir documento (bloqueado)');
-      return false; 
-    });
-
-    window.addEventListener('afterprint', e => { 
-      e.preventDefault(); 
-      e.stopPropagation();
-      return false; 
-    });
-}
-
-// Detectar intentos de abrir DevTools
-let devtoolsOpen = false;
-const detectDevTools = () => {
-  const widthThreshold = window.outerWidth - window.innerWidth > 160;
-  const heightThreshold = window.outerHeight - window.innerHeight > 160;
-  
-  if (widthThreshold || heightThreshold) {
-    if (!devtoolsOpen) {
-      devtoolsOpen = true;
-      console.clear();
-      logSecurityEvent('Detección: Apertura de DevTools en visor');
+      return DOCUMENT_CATALOG[docId];
     }
-  } else {
-    devtoolsOpen = false;
-  }
-};
 
-setInterval(detectDevTools, 500);
-setInterval(() => console.clear(), 2000);
+    const DOCUMENT_INFO = getDocumentInfo();
+    const MARKDOWN_URL = DOCUMENT_INFO.file;
+    const DOCUMENT_TITLE = DOCUMENT_INFO.title;
 
-// ==========================================
-// FUNCIONES PRINCIPALES
-// ==========================================
-function updateClock() {
-  const now = new Date();
-  const timeString = now.toLocaleTimeString('es-PE', { hour12: false });
-  document.getElementById('clockInfo').textContent = timeString;
-}
+    // Actualizar el texto del loader con el nombre del documento
+    const loaderText = document.getElementById('loaderText');
+    if (loaderText) {
+      loaderText.textContent = `Cargando ${DOCUMENT_TITLE}...`;
+    }
 
-async function loadMarkdown() {
-  try {
-    const response = await fetch(MARKDOWN_URL);
-    if (!response.ok) throw new Error('No se pudo cargar el documento');
-    
-    const markdown = await response.text();
-    const html = marked.parse(markdown);
-    
-    // Dividir el contenido en secciones por H1 y H2
-    const sections = splitIntoSections(html);
-    renderNavigation(sections);
-    renderContent(sections);
-    
-    // Ocultar loader
-    setTimeout(() => {
-      document.getElementById('loader').classList.add('hidden');
-    }, 500);
-    
-  } catch (error) {
-    document.getElementById('loader').innerHTML = `
+    // ==========================================
+    // SISTEMA DE SEGURIDAD ANTICOPIA
+    // ==========================================
+    // PROTECCIONES DE SEGURIDAD
+    // ==========================================
+    function logSecurityEvent(description) {
+      if (window.TupakAuth && window.TupakAuth.logUserAction) {
+        window.TupakAuth.logUserAction(description);
+      }
+    }
+
+    function initSecurityProtections() {
+      document.addEventListener('contextmenu', e => {
+        e.preventDefault();
+        logSecurityEvent('Intento: Clic derecho (bloqueado)');
+        return false;
+      });
+
+      document.addEventListener('selectstart', e => { e.preventDefault(); return false; });
+
+      document.addEventListener('copy', e => {
+        e.preventDefault();
+        logSecurityEvent('Intento: Copiar texto (bloqueado)');
+        return false;
+      });
+
+      document.addEventListener('cut', e => {
+        e.preventDefault();
+        logSecurityEvent('Intento: Cortar texto (bloqueado)');
+        return false;
+      });
+
+      document.addEventListener('dragstart', e => { e.preventDefault(); return false; });
+
+      document.addEventListener('keydown', function (e) {
+        // Detectar PrintScreen
+        if (e.key === 'PrintScreen' || e.keyCode === 44) {
+          logSecurityEvent('Intento: Captura de pantalla con PrintScreen');
+          // No podemos bloquearlo realmente, pero sí registrarlo
+        }
+
+        // Bloquear F12
+        if (e.key === 'F12' || e.keyCode === 123) {
+          e.preventDefault();
+          e.stopPropagation();
+          logSecurityEvent('Intento: Abrir DevTools con F12 (bloqueado)');
+          return false;
+        }
+
+        // Bloquear TODAS las combinaciones con Ctrl
+        if (e.ctrlKey) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          if (e.key === 'p' || e.key === 'P') {
+            logSecurityEvent('Intento: Imprimir con Ctrl+P (bloqueado)');
+          } else if (e.key === 'u' || e.key === 'U') {
+            logSecurityEvent('Intento: Ver código fuente con Ctrl+U (bloqueado)');
+          } else if (e.key === 's' || e.key === 'S') {
+            logSecurityEvent('Intento: Guardar documento con Ctrl+S (bloqueado)');
+          } else if (e.shiftKey && (e.key === 'i' || e.key === 'I')) {
+            logSecurityEvent('Intento: Abrir DevTools con Ctrl+Shift+I (bloqueado)');
+          } else if (e.shiftKey && (e.key === 'j' || e.key === 'J')) {
+            logSecurityEvent('Intento: Abrir consola con Ctrl+Shift+J (bloqueado)');
+          } else if (e.shiftKey && (e.key === 'c' || e.key === 'C')) {
+            logSecurityEvent('Intento: Inspeccionar elemento con Ctrl+Shift+C (bloqueado)');
+          } else {
+            logSecurityEvent(`Intento: Combinación Ctrl+${e.key} (bloqueado)`);
+          }
+          return false;
+        }
+
+        // Bloquear Command (Mac)
+        if (e.metaKey) {
+          e.preventDefault();
+          e.stopPropagation();
+          logSecurityEvent(`Intento: Combinación Cmd+${e.key} (bloqueado)`);
+          return false;
+        }
+
+        // Bloquear F1-F12
+        if (e.keyCode >= 112 && e.keyCode <= 123) {
+          e.preventDefault();
+          e.stopPropagation();
+          logSecurityEvent(`Intento: Tecla F${e.keyCode - 111} (bloqueado)`);
+          return false;
+        }
+      });
+
+      // Bloquear impresión
+      window.addEventListener('beforeprint', e => {
+        e.preventDefault();
+        e.stopPropagation();
+        logSecurityEvent('Intento: Imprimir documento (bloqueado)');
+        return false;
+      });
+
+      window.addEventListener('afterprint', e => {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      });
+    }
+
+    // Detectar intentos de abrir DevTools
+    let devtoolsOpen = false;
+    const detectDevTools = () => {
+      const widthThreshold = window.outerWidth - window.innerWidth > 160;
+      const heightThreshold = window.outerHeight - window.innerHeight > 160;
+
+      if (widthThreshold || heightThreshold) {
+        if (!devtoolsOpen) {
+          devtoolsOpen = true;
+          console.clear();
+          logSecurityEvent('Detección: Apertura de DevTools en visor');
+        }
+      } else {
+        devtoolsOpen = false;
+      }
+    };
+
+    setInterval(detectDevTools, 500);
+    setInterval(() => console.clear(), 2000);
+
+    // ==========================================
+    // FUNCIONES PRINCIPALES
+    // ==========================================
+    function updateClock() {
+      const now = new Date();
+      const timeString = now.toLocaleTimeString('es-PE', { hour12: false });
+      document.getElementById('clockInfo').textContent = timeString;
+    }
+
+    async function loadMarkdown() {
+      try {
+        const response = await fetch(MARKDOWN_URL);
+        if (!response.ok) throw new Error('No se pudo cargar el documento');
+
+        const markdown = await response.text();
+        const html = marked.parse(markdown);
+
+        // Dividir el contenido en secciones por H1 y H2
+        const sections = splitIntoSections(html);
+        renderNavigation(sections);
+        renderContent(sections);
+
+        // Ocultar loader
+        setTimeout(() => {
+          document.getElementById('loader').classList.add('hidden');
+        }, 500);
+
+      } catch (error) {
+        document.getElementById('loader').innerHTML = `
       <div style="text-align: center; color: var(--primary);">
         <i class="fas fa-exclamation-triangle" style="font-size: 3em; margin-bottom: 20px;"></i>
         <div class="loader-text">Error al cargar el documento</div>
       </div>
     `;
-  }
-}
+      }
+    }
 
-function splitIntoSections(html) {
-  const tempDiv = document.createElement('div');
-  tempDiv.innerHTML = html;
-  
-  const sections = [];
-  let currentSection = null;
-  
-  Array.from(tempDiv.children).forEach(element => {
-    if (element.tagName === 'H1' || element.tagName === 'H2') {
+    function splitIntoSections(html) {
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = html;
+
+      const sections = [];
+      let currentSection = null;
+
+      Array.from(tempDiv.children).forEach(element => {
+        if (element.tagName === 'H1' || element.tagName === 'H2') {
+          if (currentSection) {
+            sections.push(currentSection);
+          }
+          currentSection = {
+            id: `section-${sections.length}`,
+            title: element.textContent,
+            level: element.tagName,
+            content: element.outerHTML
+          };
+        } else if (currentSection) {
+          currentSection.content += element.outerHTML;
+        }
+      });
+
       if (currentSection) {
         sections.push(currentSection);
       }
-      currentSection = {
-        id: `section-${sections.length}`,
-        title: element.textContent,
-        level: element.tagName,
-        content: element.outerHTML
-      };
-    } else if (currentSection) {
-      currentSection.content += element.outerHTML;
-    }
-  });
-  
-  if (currentSection) {
-    sections.push(currentSection);
-  }
-  
-  return sections;
-}
 
-function renderNavigation(sections) {
-  const navList = document.getElementById('navList');
-  navList.innerHTML = sections.map((section, index) => `
+      return sections;
+    }
+
+    function renderNavigation(sections) {
+      const navList = document.getElementById('navList');
+      navList.innerHTML = sections.map((section, index) => `
     <li class="nav-item">
       <a class="nav-link ${index === 0 ? 'active' : ''}" 
          onclick="showSection('${section.id}')" 
@@ -899,131 +920,146 @@ function renderNavigation(sections) {
       </a>
     </li>
   `).join('');
-}
+    }
 
-function renderContent(sections) {
-  const container = document.getElementById('documentPages');
-  container.innerHTML = sections.map((section, index) => `
+    function renderContent(sections) {
+      const container = document.getElementById('documentPages');
+      container.innerHTML = sections.map((section, index) => `
     <div class="page-section ${index === 0 ? 'active' : ''}" id="${section.id}">
       <div class="content">
         ${section.content}
       </div>
     </div>
   `).join('');
-}
-
-function showSection(sectionId) {
-  // Ocultar todas las secciones
-  document.querySelectorAll('.page-section').forEach(section => {
-    section.classList.remove('active');
-  });
-  
-  // Mostrar la sección seleccionada
-  document.getElementById(sectionId).classList.add('active');
-  
-  // Actualizar navegación
-  document.querySelectorAll('.nav-link').forEach(link => {
-    link.classList.remove('active');
-    if (link.dataset.section === sectionId) {
-      link.classList.add('active');
     }
-  });
-  
-  // Scroll al inicio del contenido
-  const docContent = document.querySelector('.document-content');
-  if (docContent) {
-    docContent.scrollTop = 0;
-  }
-}
 
-// ==========================================
-// INICIALIZACIÓN
-// ==========================================
-async function initManual() {
-  // Esperar a que TupakAuth esté disponible
-  if (!window.TupakAuth) {
-    setTimeout(initManual, 100);
-    return;
-  }
-  
-  // Inicializar protecciones de seguridad
-  initSecurityProtections();
+    function showSection(sectionId) {
+      // Ocultar todas las secciones
+      document.querySelectorAll('.page-section').forEach(section => {
+        section.classList.remove('active');
+      });
 
-  // Verificar autenticación
-  const isAuth = await window.TupakAuth.checkAuth();
-  if (!isAuth) {
-    return;
-  }
-  
-  // Registrar apertura de documento
-  const userId = window.TupakAuth.getUserId();
-  const userEmail = window.TupakAuth.getUserEmail();
-  
-  if (userId && userEmail) {
-    try {
-      await window.TupakAuth.logUserLogin(userId, userEmail, DOCUMENT_TITLE);
-    } catch (error) {
-      // Error registrado en auth.js
+      // Mostrar la sección seleccionada
+      document.getElementById(sectionId).classList.add('active');
+
+      // Actualizar navegación
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+        if (link.dataset.section === sectionId) {
+          link.classList.add('active');
+        }
+      });
+
+      // Scroll al inicio del contenido
+      const docContent = document.querySelector('.document-content');
+      if (docContent) {
+        docContent.scrollTop = 0;
+      }
     }
-  }
-  
-  // Actualizar interfaz con datos del usuario
-  const userName = window.TupakAuth.getUserDisplayName();
-  const userInfoElement = document.getElementById('userInfo');
-  if (userInfoElement) {
-    userInfoElement.textContent = userName;
-  }
-  
-  // Actualizar título del documento
-  const docTitleElement = document.getElementById('documentTitle');
-  if (docTitleElement) {
-    docTitleElement.textContent = DOCUMENT_TITLE;
-  }
-  document.title = `${DOCUMENT_TITLE} - TUPAK RANTINA`;
-  
-  updateClock();
-  setInterval(updateClock, 1000);
-  
-  loadMarkdown();
-  
-  // Inicializar marca de agua dinámica
-  initDynamicWatermark(userName, userEmail, DOCUMENT_TITLE);
-}
 
-// ==========================================
-// SISTEMA DE MARCA DE AGUA DINÁMICA
-// ==========================================
-function initDynamicWatermark(userName, userEmail, documentName) {
-  // Validar que los elementos existan
-  const wmUser = document.getElementById('wmUser');
-  const wmDoc = document.getElementById('wmDoc');
-  const wmSess = document.getElementById('wmSess');
-  const wmClock = document.getElementById('wmClock');
-  
-  if (!wmUser || !wmDoc || !wmSess || !wmClock) {
-    console.error('❌ No se encontraron elementos de marca de agua');
-    return;
-  }
-  
-  // Actualizar información del usuario en la etiqueta
-  wmUser.textContent = `${userName} (${userEmail})`;
-  wmDoc.textContent = documentName;
-  wmSess.textContent = SESSION_ID;
-  
-  // Actualizar reloj cada 200ms
-  setInterval(() => {
-    if (wmClock) {
-      wmClock.textContent = new Date().toLocaleTimeString('es-ES');
+    // ==========================================
+    // INICIALIZACIÓN
+    // ==========================================
+    async function initManual() {
+      // Esperar a que TupakAuth esté disponible
+      if (!window.TupakAuth) {
+        setTimeout(initManual, 100);
+        return;
+      }
+
+      // Inicializar protecciones de seguridad
+      initSecurityProtections();
+
+      // VERIFICACIÓN ESTRICTA DE AUTENTICACIÓN
+      // Si falla, requireAuth() redirige automáticamente al login
+      // El loader permanece visible mientras se redirige
+      const isAuth = await window.TupakAuth.requireAuth();
+
+      if (!isAuth) {
+        // La redirección ya ocurrió en requireAuth
+        // Mantener el loader visible mientras se redirige
+        const loaderText = document.getElementById('loaderText');
+        if (loaderText) {
+          loaderText.textContent = 'Redirigiendo al login...';
+        }
+        return;
+      }
+
+      // Actualizar texto del loader
+      const loaderText = document.getElementById('loaderText');
+      if (loaderText) {
+        loaderText.textContent = `Cargando ${DOCUMENT_TITLE}...`;
+      }
+
+      // Registrar apertura de documento
+      const userId = window.TupakAuth.getUserId();
+      const userEmail = window.TupakAuth.getUserEmail();
+
+      if (userId && userEmail) {
+        try {
+          await window.TupakAuth.logUserLogin(userId, userEmail, DOCUMENT_TITLE);
+        } catch (error) {
+          // Error registrado en auth.js
+        }
+      }
+
+      // Actualizar interfaz con datos del usuario
+      const userName = window.TupakAuth.getUserDisplayName();
+      const userInfoElement = document.getElementById('userInfo');
+      if (userInfoElement) {
+        userInfoElement.textContent = userName;
+      }
+
+      // Actualizar título del documento
+      const docTitleElement = document.getElementById('documentTitle');
+      if (docTitleElement) {
+        docTitleElement.textContent = DOCUMENT_TITLE;
+      }
+      document.title = `${DOCUMENT_TITLE} - TUPAK RANTINA`;
+
+      updateClock();
+      setInterval(updateClock, 1000);
+
+      loadMarkdown();
+
+      // Inicializar marca de agua dinámica
+      initDynamicWatermark(userName, userEmail, DOCUMENT_TITLE);
     }
-  }, 200);
 
-  // Crear patrón SVG repetido con información completa
-  function buildTile() {
-    const now = new Date();
-    const fecha = now.toLocaleDateString('es-ES');
-    const hora = now.toLocaleTimeString('es-ES');
-    
-    const svg = `
+    // ==========================================
+    // SISTEMA DE MARCA DE AGUA DINÁMICA
+    // ==========================================
+    function initDynamicWatermark(userName, userEmail, documentName) {
+      // Validar que los elementos existan
+      const wmUser = document.getElementById('wmUser');
+      const wmDoc = document.getElementById('wmDoc');
+      const wmSess = document.getElementById('wmSess');
+      const wmClock = document.getElementById('wmClock');
+
+      if (!wmUser || !wmDoc || !wmSess || !wmClock) {
+        console.error('❌ No se encontraron elementos de marca de agua');
+        return;
+      }
+
+      // Actualizar información del usuario en la etiqueta
+      wmUser.textContent = `${userName} (${userEmail})`;
+      wmDoc.textContent = documentName;
+      wmSess.textContent = SESSION_ID;
+
+      // Actualizar reloj cada 200ms
+      setInterval(() => {
+        if (wmClock) {
+          wmClock.textContent = new Date().toLocaleTimeString('es-ES');
+        }
+      }, 200);
+
+      // Crear patrón SVG repetido con información completa
+      function buildTile() {
+        const now = new Date();
+        const fecha = now.toLocaleDateString('es-ES');
+        const hora = now.toLocaleTimeString('es-ES');
+
+        const svg = `
       <svg xmlns='http://www.w3.org/2000/svg' width='400' height='200'>
         <rect width='100%' height='100%' fill='white'/>
         <text x='20' y='30' font-family='Arial' font-size='18' fill='rgba(0,23,73,0.22)' font-weight='700'>TUPAK RANTINA</text>
@@ -1036,40 +1072,41 @@ function initDynamicWatermark(userName, userEmail, documentName) {
         <text x='20' y='178' font-family='Arial' font-size='14' fill='rgba(1,92,208,0.16)' font-weight='600'>${userName} (${userEmail})</text>
         <text x='20' y='195' font-family='Arial' font-size='13' fill='rgba(228,132,16,0.14)'>${documentName} • ${hora}</text>
       </svg>`;
-    return "url(\"data:image/svg+xml;utf8," + encodeURIComponent(svg) + "\")";
-  }
+        return "url(\"data:image/svg+xml;utf8," + encodeURIComponent(svg) + "\")";
+      }
 
-  const tile = document.getElementById('wmTile');
-  if (tile) {
-    // Función para posicionar aleatoriamente
-    function randomizePosition() {
-      const randomX = Math.floor(Math.random() * 400);
-      const randomY = Math.floor(Math.random() * 200);
-      tile.style.backgroundPosition = `${randomX}px ${randomY}px`;
+      const tile = document.getElementById('wmTile');
+      if (tile) {
+        // Función para posicionar aleatoriamente
+        function randomizePosition() {
+          const randomX = Math.floor(Math.random() * 400);
+          const randomY = Math.floor(Math.random() * 200);
+          tile.style.backgroundPosition = `${randomX}px ${randomY}px`;
+        }
+
+        // Actualizar el patrón inicialmente con posición aleatoria
+        tile.style.backgroundImage = buildTile();
+        randomizePosition();
+
+        // Actualizar el patrón cada segundo para que la hora cambie (sin mover)
+        setInterval(() => {
+          tile.style.backgroundImage = buildTile();
+        }, 1000);
+
+        // Cambiar la posición cada 30 segundos
+        setInterval(() => {
+          randomizePosition();
+        }, 30000);
+      }
     }
-    
-    // Actualizar el patrón inicialmente con posición aleatoria
-    tile.style.backgroundImage = buildTile();
-    randomizePosition();
-    
-    // Actualizar el patrón cada segundo para que la hora cambie (sin mover)
-    setInterval(() => {
-      tile.style.backgroundImage = buildTile();
-    }, 1000);
-    
-    // Cambiar la posición cada 30 segundos
-    setInterval(() => {
-      randomizePosition();
-    }, 30000);
-  }
-}
 
-document.addEventListener('DOMContentLoaded', initManual);
-</script>
+    document.addEventListener('DOMContentLoaded', initManual);
+  </script>
 
-<!-- Cargar scripts de autenticación después del DOM -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="auth.js"></script>
+  <!-- Cargar scripts de autenticación después del DOM -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="auth.js"></script>
 
 </body>
+
 </html>

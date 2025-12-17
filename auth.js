@@ -21,7 +21,7 @@ const WHATSAPP_API_KEY = 'smaksnaHG';
 let supabase;
 if (typeof window.supabase !== 'undefined') {
     supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-        auth: { 
+        auth: {
             persistSession: true, // CAMBIO: Activar persistencia de sesión
             autoRefreshToken: true,
             detectSessionInUrl: true
@@ -59,7 +59,7 @@ function setSession(user) {
 function getSession() {
     const sessionData = sessionStorage.getItem(SESSION_KEY);
     if (!sessionData) return null;
-    
+
     try {
         return JSON.parse(sessionData);
     } catch (error) {
@@ -105,7 +105,7 @@ async function ensureSupabaseSession() {
     try {
         // Primero verificar si ya hay una sesión activa
         const { data, error } = await supabase.auth.getSession();
-        
+
         if (error) {
             console.error('❌ Error al obtener sesión de Supabase:', error);
             return false;
@@ -119,7 +119,7 @@ async function ensureSupabaseSession() {
 
         // Si no hay sesión activa, intentar restaurar desde sessionStorage
         const storedSession = sessionStorage.getItem(SUPABASE_SESSION_KEY);
-        
+
         if (!storedSession) {
             console.error('❌ No hay tokens almacenados para restaurar');
             return false;
@@ -158,18 +158,18 @@ async function ensureSupabaseSession() {
 function checkSessionTimeout() {
     const session = getSession();
     if (!session) return false;
-    
+
     const lastActivity = sessionStorage.getItem(LAST_ACTIVITY_KEY);
     if (!lastActivity) return false;
-    
+
     const timeSinceLastActivity = Date.now() - parseInt(lastActivity);
-    
+
     if (timeSinceLastActivity > SESSION_TIMEOUT) {
         showNotification('Sesión expirada por inactividad', 'warning');
         logout();
         return false;
     }
-    
+
     return true;
 }
 
@@ -204,7 +204,7 @@ async function logUserLogin(userId, email, documentoAbierto = 'Sin especificar')
     try {
         // Asegurar que la sesión de Supabase esté activa
         await ensureSupabaseSession();
-        
+
         // Verificar que tenemos una sesión activa
         const { data: sessionData } = await supabase.auth.getSession();
         if (!sessionData?.session) {
@@ -231,7 +231,7 @@ async function logUserLogin(userId, email, documentoAbierto = 'Sin especificar')
             console.error('   Hint:', error.hint);
             return false;
         }
-        
+
         return true;
     } catch (error) {
         console.error('❌ Error en logUserLogin:', error);
@@ -264,16 +264,16 @@ function storeOTPSession(email, otp, userData, supabaseData) {
 function getOTPSession() {
     const otpData = sessionStorage.getItem(OTP_SESSION_KEY);
     if (!otpData) return null;
-    
+
     try {
         const session = JSON.parse(otpData);
         const elapsed = Date.now() - session.timestamp;
-        
+
         if (elapsed > OTP_TIMEOUT) {
             clearOTPSession();
             return null;
         }
-        
+
         return session;
     } catch (error) {
         console.error('Error al parsear sesión OTP:', error);
@@ -289,7 +289,7 @@ function clearOTPSession() {
 async function sendOTPWhatsApp(phoneNumber, otp, userName) {
     try {
         const message = `🔐 *TUPAK RANTINA - Código de Verificación*\n\nHola ${userName},\n\nTu código de acceso es: *${otp}*\n\nEste código expira en 5 minutos.\n\n_Si no solicitaste este código, ignora este mensaje._`;
-        
+
         const options = {
             method: 'POST',
             headers: {
@@ -306,7 +306,7 @@ async function sendOTPWhatsApp(phoneNumber, otp, userName) {
 
         const response = await fetch(WHATSAPP_API_URL, options);
         const data = await response.json();
-        
+
         if (response.ok) {
             return { success: true, data: data };
         } else {
@@ -323,11 +323,11 @@ async function sendOTPWhatsApp(phoneNumber, otp, userName) {
 async function logUserAction(accion) {
     const userId = getUserId();
     const userEmail = getUserEmail();
-    
+
     if (!userId || !userEmail) {
         return false;
     }
-    
+
     try {
         // Asegurar que la sesión de Supabase esté activa
         const sessionOk = await ensureSupabaseSession();
@@ -335,14 +335,14 @@ async function logUserAction(accion) {
             console.error('❌ No se pudo asegurar la sesión de Supabase');
             // Intentar de todas formas (por si la sesión está en las cookies)
         }
-        
+
         // Verificar una vez más que tenemos una sesión activa
         const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
         if (sessionError) {
             console.error('❌ Error verificando sesión:', sessionError);
             return false;
         }
-        
+
         if (!sessionData?.session) {
             console.error('❌ No hay sesión activa de Supabase');
             return false;
@@ -367,7 +367,7 @@ async function logUserAction(accion) {
             console.error('   Hint:', error.hint);
             return false;
         }
-        
+
         return true;
     } catch (error) {
         console.error('❌ Error en logUserAction:', error);
@@ -395,13 +395,13 @@ async function login(email, password) {
 
         // 2. Verificar permisos en docsuserstr
         const { hasPermission, userData } = await checkUserPermissions(email);
-        
+
         if (!hasPermission) {
             // Cerrar sesión de Supabase si no tiene permisos
             await supabase.auth.signOut();
-            return { 
-                success: false, 
-                error: 'No cuentas con los permisos suficientes para acceder a este sistema.' 
+            return {
+                success: false,
+                error: 'No cuentas con los permisos suficientes para acceder a este sistema.'
             };
         }
 
@@ -416,10 +416,10 @@ async function login(email, password) {
 
         // 4. Generar OTP
         const otp = generateOTP();
-        
+
         // 5. Enviar OTP por WhatsApp
         const sendResult = await sendOTPWhatsApp(userData.whatsapp, otp, userData.nombre);
-        
+
         if (!sendResult.success) {
             await supabase.auth.signOut();
             return {
@@ -430,14 +430,14 @@ async function login(email, password) {
 
         // 6. Guardar toda la información de sesión (NO cerrar sesión de Supabase)
         storeOTPSession(email, otp, userData, data);
-        
+
         // 7. Guardar sesión de Supabase para mantenerla activa
         if (data.session) {
             storeSupabaseSession(data.session);
         }
-        
-        return { 
-            success: true, 
+
+        return {
+            success: true,
             requiresOTP: true,
             message: `Código enviado a WhatsApp terminado en (${userData.whatsapp.slice(-4)})`
         };
@@ -452,7 +452,7 @@ async function verifyOTPAndLogin(inputOTP) {
     try {
         // 1. Obtener sesión OTP
         const otpSession = getOTPSession();
-        
+
         if (!otpSession) {
             return {
                 success: false,
@@ -470,7 +470,7 @@ async function verifyOTPAndLogin(inputOTP) {
 
         // 3. La sesión de Supabase ya está activa, solo verificamos que siga válida
         const { data: { session }, error } = await supabase.auth.getSession();
-        
+
         if (error || !session) {
             console.error('Error al verificar sesión:', error);
             clearOTPSession();
@@ -486,13 +486,13 @@ async function verifyOTPAndLogin(inputOTP) {
             userData: otpSession.userData
         };
         setSession(enhancedUser);
-        
+
         // 5. Limpiar sesión OTP
         clearOTPSession();
-        
+
         // 6. Iniciar monitoreo
         startSessionMonitoring();
-        
+
         return { success: true, user: enhancedUser };
     } catch (error) {
         console.error('Error en verifyOTPAndLogin:', error);
@@ -506,13 +506,13 @@ async function logout() {
     try {
         // Cerrar sesión en Supabase
         await supabase.auth.signOut();
-        
+
         // Limpiar sesión local
         clearSession();
-        
+
         // Detener monitoreo
         stopSessionMonitoring();
-        
+
         // Redirigir al login
         window.location.href = 'login.html';
     } catch (error) {
@@ -525,39 +525,87 @@ async function logout() {
 }
 
 // ===== VERIFICACIÓN DE AUTENTICACIÓN =====
-async function checkAuth() {
+
+/**
+ * Verificación ESTRICTA de autenticación
+ * Esta función DEBE llamarse al inicio de cada página protegida
+ * Redirige inmediatamente al login si no hay sesión válida
+ */
+async function requireAuth() {
+    // 1. Verificación rápida de sessionStorage (síncrona)
     const session = getSession();
-    
+
     if (!session) {
+        console.log('⚠️ No hay sesión en sessionStorage - redirigiendo a login');
         redirectToLogin();
         return false;
     }
-    
-    // Verificar timeout
-    if (!checkSessionTimeout()) {
-        return false;
+
+    // 2. Verificar que la sesión no haya expirado por timeout
+    const lastActivity = sessionStorage.getItem(LAST_ACTIVITY_KEY);
+    if (lastActivity) {
+        const timeSinceLastActivity = Date.now() - parseInt(lastActivity);
+        if (timeSinceLastActivity > SESSION_TIMEOUT) {
+            console.log('⚠️ Sesión expirada por inactividad - redirigiendo a login');
+            clearSession();
+            redirectToLogin();
+            return false;
+        }
     }
-    
-    // Verificar que tenga datos de usuario de docsuserstr
-    // (Ya se verificaron en el login, no volver a consultar Supabase)
-    if (!session.user.userData) {
-        console.error('Sesión sin datos de usuario');
+
+    // 3. Verificar datos de usuario
+    if (!session.user || !session.user.userData) {
+        console.log('⚠️ Sesión sin datos de usuario válidos - redirigiendo a login');
+        clearSession();
         redirectToLogin();
         return false;
     }
-    
-    // Verificar que el usuario siga activo (usando datos en sesión)
+
+    // 4. Verificar que el usuario esté activo
     if (!session.user.userData.activo) {
+        console.log('⚠️ Usuario no activo - redirigiendo a login');
         showNotification('Tus permisos de acceso han sido revocados', 'error');
-        await logout();
+        clearSession();
+        redirectToLogin();
         return false;
     }
-    
-    // La sesión es válida si existe y no ha expirado
+
+    // 5. VERIFICACIÓN CRÍTICA: Validar con Supabase que la sesión sigue siendo válida
+    try {
+        if (supabase) {
+            const { data, error } = await supabase.auth.getSession();
+
+            if (error || !data?.session) {
+                console.log('⚠️ Sesión de Supabase no válida - redirigiendo a login');
+                clearSession();
+                redirectToLogin();
+                return false;
+            }
+
+            // Actualizar tokens si es necesario
+            storeSupabaseSession(data.session);
+        }
+    } catch (error) {
+        console.error('❌ Error verificando sesión con Supabase:', error);
+        clearSession();
+        redirectToLogin();
+        return false;
+    }
+
+    // 6. Sesión válida - actualizar estado
     currentUser = session.user;
     updateLastActivity();
     startSessionMonitoring();
+
+    console.log('✅ Sesión verificada correctamente para:', session.user.userData?.nombre || session.user.email);
     return true;
+}
+
+/**
+ * Función de compatibilidad (llama a requireAuth internamente)
+ */
+async function checkAuth() {
+    return await requireAuth();
 }
 
 function redirectToLogin() {
@@ -574,14 +622,14 @@ function startSessionMonitoring() {
     if (sessionCheckInterval) {
         clearInterval(sessionCheckInterval);
     }
-    
+
     // Verificar sesión cada 30 segundos
     sessionCheckInterval = setInterval(() => {
         if (!checkSessionTimeout()) {
             stopSessionMonitoring();
         }
     }, 30000);
-    
+
     // Actualizar actividad con eventos del usuario
     document.addEventListener('mousemove', updateLastActivity);
     document.addEventListener('keypress', updateLastActivity);
@@ -594,7 +642,7 @@ function stopSessionMonitoring() {
         clearInterval(sessionCheckInterval);
         sessionCheckInterval = null;
     }
-    
+
     // Remover event listeners
     document.removeEventListener('mousemove', updateLastActivity);
     document.removeEventListener('keypress', updateLastActivity);
@@ -617,7 +665,7 @@ function showNotification(message, type = 'info') {
         `;
         document.body.appendChild(container);
     }
-    
+
     const notification = document.createElement('div');
     const colors = {
         success: '#10b981',
@@ -625,7 +673,7 @@ function showNotification(message, type = 'info') {
         warning: '#f59e0b',
         info: '#3b82f6'
     };
-    
+
     notification.style.cssText = `
         background: ${colors[type] || colors.info};
         color: white;
@@ -639,14 +687,14 @@ function showNotification(message, type = 'info') {
         min-width: 300px;
         animation: slideIn 0.3s ease;
     `;
-    
+
     notification.innerHTML = `
         <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
         <span>${message}</span>
     `;
-    
+
     container.appendChild(notification);
-    
+
     setTimeout(() => {
         notification.style.animation = 'slideOut 0.3s ease';
         setTimeout(() => notification.remove(), 300);
@@ -661,28 +709,28 @@ function getCurrentUser() {
 function getUserId() {
     const user = getCurrentUser();
     if (!user) return null;
-    
+
     return user.id || null;
 }
 
 function getUserDisplayName() {
     const user = getCurrentUser();
     if (!user) return 'Usuario';
-    
+
     // Priorizar nombre de docsuserstr
     if (user.userData?.nombre) {
         return user.userData.nombre;
     }
-    
-    return user.user_metadata?.full_name || 
-           user.email?.split('@')[0] || 
-           'Usuario';
+
+    return user.user_metadata?.full_name ||
+        user.email?.split('@')[0] ||
+        'Usuario';
 }
 
 function getUserEmail() {
     const user = getCurrentUser();
     if (!user) return '';
-    
+
     return user.userData?.correo || user.email || '';
 }
 
@@ -724,6 +772,7 @@ window.TupakAuth = {
     login,
     logout,
     checkAuth,
+    requireAuth,  // Nueva función de verificación estricta
     getCurrentUser,
     getUserId,
     getUserDisplayName,

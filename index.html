@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biblioteca Digital - TUPAK RANTINA</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
         :root {
             --primary: #001749;
@@ -37,7 +38,7 @@
         .top-bar {
             background: var(--primary);
             padding: 15px 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             position: fixed;
             top: 0;
             left: 0;
@@ -142,7 +143,7 @@
             background: white;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
             border: 1px solid #e0e0e0;
@@ -150,7 +151,7 @@
 
         .book-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 6px 20px rgba(0,23,73,0.12);
+            box-shadow: 0 6px 20px rgba(0, 23, 73, 0.12);
         }
 
         .book-cover {
@@ -194,7 +195,7 @@
         }
 
         .book-subtitle-cover {
-            color: rgba(255,255,255,0.9);
+            color: rgba(255, 255, 255, 0.9);
             font-size: 0.9em;
             margin-top: 12px;
             text-align: center;
@@ -284,7 +285,7 @@
             border-radius: 8px;
             font-size: 0.9em;
             display: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             z-index: 1000;
         }
 
@@ -402,7 +403,43 @@
         }
     </style>
 </head>
+
 <body>
+    <!-- PANTALLA DE CARGA DE AUTENTICACIÓN -->
+    <div id="auth-loader" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--blue) 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 99999;
+        transition: opacity 0.3s ease;
+    ">
+        <img src="https://i.postimg.cc/zBPmbxNT/TRANSPARENTE-min.png" alt="TUPAK RANTINA"
+            style="height: 80px; margin-bottom: 20px;">
+        <div style="
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        "></div>
+        <p style="color: white; margin-top: 20px; font-weight: 500;">Verificando acceso...</p>
+        <style>
+            @keyframes spin {
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+        </style>
+    </div>
+
     <div class="top-bar">
         <div class="container">
             <header>
@@ -417,7 +454,8 @@
                     <span id="user-display" style="color: white; font-size: 0.9em;">
                         <i class="fas fa-user"></i> <span id="user-name">Usuario</span>
                     </span>
-                    <button onclick="handleLogout()" style="background: rgba(255,255,255,0.2); color: white; border: 2px solid rgba(255,255,255,0.3); padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; transition: all 0.3s ease;">
+                    <button onclick="handleLogout()"
+                        style="background: rgba(255,255,255,0.2); color: white; border: 2px solid rgba(255,255,255,0.3); padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; transition: all 0.3s ease;">
                         <i class="fas fa-sign-out-alt"></i> Salir
                     </button>
                 </div>
@@ -467,7 +505,8 @@
                     </div>
                     <div class="book-info">
                         <h3>Reglamento Interno</h3>
-                        <p>Reglamento Interno que regula la organización, funcionamiento y procedimientos operativos de la Caja.</p>
+                        <p>Reglamento Interno que regula la organización, funcionamiento y procedimientos operativos de
+                            la Caja.</p>
                         <div class="book-meta">
                             <span class="book-category"><i class="fas fa-gavel"></i> Normativa</span>
                             <button class="read-btn">
@@ -484,8 +523,8 @@
                 <p>Guías de procedimientos y operaciones institucionales</p>
             </div>
 
-                     <div class="library-grid">
-                            <!-- Manual 1: Manual de Funciones -->
+            <div class="library-grid">
+                <!-- Manual 1: Manual de Funciones -->
                 <div class="book-card" onclick="openBook('visor.html?id=006')">
                     <div class="book-cover">
                         <div class="book-icon"><i class="fas fa-users-cog"></i></div>
@@ -505,7 +544,7 @@
                 </div>
 
 
-            
+
                 <!-- Manual 2: Manual de Crédito -->
                 <div class="book-card" onclick="openBook('visor.html?id=001')">
                     <div class="book-cover">
@@ -553,7 +592,8 @@
                     </div>
                     <div class="book-info">
                         <h3>Manual de Caja y Bóveda</h3>
-                        <p>Procedimientos de manejo y control de caja y bóveda, con énfasis en gestión del riesgo de liquidez.</p>
+                        <p>Procedimientos de manejo y control de caja y bóveda, con énfasis en gestión del riesgo de
+                            liquidez.</p>
                         <div class="book-meta">
                             <span class="book-category"><i class="fas fa-shield-alt"></i> Operaciones</span>
                             <button class="read-btn">
@@ -582,7 +622,8 @@
                     </div>
                     <div class="book-info">
                         <h3>Tasas Máximas de Interés</h3>
-                        <p>Información oficial de tasas de interés activas y pasivas efectivas máximas y referenciales del sector financiero ecuatoriano.</p>
+                        <p>Información oficial de tasas de interés activas y pasivas efectivas máximas y referenciales
+                            del sector financiero ecuatoriano.</p>
                         <div class="book-meta">
                             <span class="book-category"><i class="fas fa-chart-line"></i> Finanzas</span>
                             <button class="read-btn">
@@ -608,7 +649,7 @@
         // ==========================================
         // SISTEMA DE SEGURIDAD ANTICOPIA
         // ==========================================
-        
+
         function logSecurityEvent(description) {
             if (window.TupakAuth && window.TupakAuth.logUserAction) {
                 window.TupakAuth.logUserAction(description);
@@ -617,7 +658,7 @@
 
         function initSecurityProtections() {
             // Deshabilitar clic derecho
-            document.addEventListener('contextmenu', function(e) {
+            document.addEventListener('contextmenu', function (e) {
                 e.preventDefault();
                 showSecurityNotice();
                 // Registrar intento
@@ -626,13 +667,13 @@
             });
 
             // Deshabilitar selección de texto
-            document.addEventListener('selectstart', function(e) {
+            document.addEventListener('selectstart', function (e) {
                 e.preventDefault();
                 return false;
             });
 
             // Deshabilitar copiar con Ctrl+C
-            document.addEventListener('copy', function(e) {
+            document.addEventListener('copy', function (e) {
                 e.preventDefault();
                 showSecurityNotice();
                 // Registrar intento
@@ -641,7 +682,7 @@
             });
 
             // Deshabilitar cortar
-            document.addEventListener('cut', function(e) {
+            document.addEventListener('cut', function (e) {
                 e.preventDefault();
                 showSecurityNotice();
                 // Registrar intento
@@ -650,7 +691,7 @@
             });
 
             // Deshabilitar teclas de desarrollador y atajos
-            document.addEventListener('keydown', function(e) {
+            document.addEventListener('keydown', function (e) {
                 // Bloquear F12
                 if (e.key === 'F12' || e.keyCode === 123) {
                     e.preventDefault();
@@ -701,7 +742,7 @@
             });
 
             // Bloquear impresión
-            window.addEventListener('beforeprint', function(e) {
+            window.addEventListener('beforeprint', function (e) {
                 e.preventDefault();
                 e.stopPropagation();
                 showSecurityNotice();
@@ -710,7 +751,7 @@
                 return false;
             });
 
-            window.addEventListener('afterprint', function(e) {
+            window.addEventListener('afterprint', function (e) {
                 e.preventDefault();
                 e.stopPropagation();
                 return false;
@@ -718,8 +759,8 @@
 
             // Detectar apertura de DevTools
             let devToolsNotified = false;
-            const devToolsChecker = setInterval(function() {
-                const devToolsLikely = window.outerWidth - window.innerWidth > 160 || 
+            const devToolsChecker = setInterval(function () {
+                const devToolsLikely = window.outerWidth - window.innerWidth > 160 ||
                     window.outerHeight - window.innerHeight > 160;
 
                 if (devToolsLikely) {
@@ -732,21 +773,21 @@
                     devToolsNotified = false;
                 }
             }, 1000);
-            
+
             // Protección contra drag and drop
-            document.addEventListener('dragstart', function(e) {
+            document.addEventListener('dragstart', function (e) {
                 e.preventDefault();
                 return false;
             });
 
             // Deshabilitar inspección al hacer doble clic
-            document.addEventListener('dblclick', function(e) {
+            document.addEventListener('dblclick', function (e) {
                 e.preventDefault();
                 return false;
             });
 
             // Protección adicional: limpiar consola periódicamente
-            setInterval(function() {
+            setInterval(function () {
                 console.clear();
             }, 2000);
         }
@@ -755,7 +796,7 @@
         function showSecurityNotice() {
             const notice = document.getElementById('securityNotice');
             notice.style.display = 'block';
-            setTimeout(function() {
+            setTimeout(function () {
                 notice.style.display = 'none';
             }, 3000);
         }
@@ -774,36 +815,53 @@
                 setTimeout(initPage, 100);
                 return;
             }
-            
+
             // Inicializar protecciones de seguridad DESPUÉS de que TupakAuth esté disponible
             initSecurityProtections();
 
-            const isAuth = await window.TupakAuth.checkAuth();
-            if (isAuth) {
-                // Registrar acceso a la biblioteca
-                const userId = window.TupakAuth.getUserId();
-                const userEmail = window.TupakAuth.getUserEmail();
-                
-                if (userId && userEmail) {
-                    try {
-                        await window.TupakAuth.logUserLogin(userId, userEmail, 'Biblioteca Principal');
-                    } catch (error) {
-                        console.error('❌ Error registrando acceso:', error);
-                    }
-                } else {
-                    console.error('⚠️ No se pudo obtener userId o userEmail');
-                }
-                
-                updateUserDisplay();
+            // VERIFICACIÓN ESTRICTA DE AUTENTICACIÓN
+            // Si falla, requireAuth() redirige automáticamente al login
+            // El loader permanece visible mientras se redirige
+            const isAuth = await window.TupakAuth.requireAuth();
+
+            if (!isAuth) {
+                // La redirección ya ocurrió en requireAuth
+                // Mantener el loader visible mientras se redirige
+                return;
             }
+
+            // AUTENTICACIÓN EXITOSA - Ocultar el loader
+            const authLoader = document.getElementById('auth-loader');
+            if (authLoader) {
+                authLoader.style.opacity = '0';
+                setTimeout(() => {
+                    authLoader.style.display = 'none';
+                }, 300);
+            }
+
+            // Registrar acceso a la biblioteca
+            const userId = window.TupakAuth.getUserId();
+            const userEmail = window.TupakAuth.getUserEmail();
+
+            if (userId && userEmail) {
+                try {
+                    await window.TupakAuth.logUserLogin(userId, userEmail, 'Biblioteca Principal');
+                } catch (error) {
+                    console.error('❌ Error registrando acceso:', error);
+                }
+            } else {
+                console.error('⚠️ No se pudo obtener userId o userEmail');
+            }
+
+            updateUserDisplay();
         }
 
         function updateUserDisplay() {
             const userName = window.TupakAuth.getUserDisplayName();
             const userEmail = window.TupakAuth.getUserEmail();
-            
+
             document.getElementById('user-name').textContent = userName;
-            
+
             // Opcional: Mostrar email en tooltip
             const userNameElement = document.getElementById('user-name');
             if (userNameElement && userEmail) {
@@ -952,4 +1010,5 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="auth.js"></script>
 </body>
+
 </html>
